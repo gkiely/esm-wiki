@@ -20,3 +20,10 @@ declare const gapi: {
     getToken: () => Token | null;
   };
 };
+
+// withResolvers
+declare const gapi_loaded: {
+  promise: Promise<void>;
+  resolve: () => void;
+  reject: (error: Error) => void;
+};

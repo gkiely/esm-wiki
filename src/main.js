@@ -1,21 +1,27 @@
-import { useState } from 'https://esm.sh/preact/hooks';
+import { useState, useEffect } from 'https://esm.sh/preact/hooks';
 import register from 'https://esm.sh/preact-custom-element';
 import { html } from 'https://esm.sh/htm/preact';
+// import './Tree.js';
+import './Page.js';
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
+const Main = () => {
+  // 4. Wait for gapi_loaded promise
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  return html`
-    <div style="display: flex; gap: .5rem">
-      <button type="button" onClick=${() => setCount(count - 1)}>
-        Decrement
-      </button>
-      <button type="button" onClick=${() => setCount(count + 1)}>
-        Increment
-      </button>
-      <div id="count">${count}</div>
+  useEffect(() => {
+    gapi_loaded.promise.then(() => setLoading(false));
+    gapi_loaded.promise.catch((err) => setError(err));
+  }, []);
+
+  if (loading) return html`<div>Loading...</div>`;
+  if (error) return html`<div>Error: ${error}</div>`;
+
+  return html`      
+    <div>
+      <app-page></app-page>
     </div>
   `;
 };
 
-register(Counter, 'hello-world', [], { shadow: true });
+register(Main, 'app-main', [], { shadow: false });

@@ -6,6 +6,7 @@
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
   },
   "include": ["src/**/*.js", "main.d.ts"],
   "exclude": ["node_modules"],
