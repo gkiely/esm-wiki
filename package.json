@@ -1,0 +1,30 @@
+{
+  "name": "esm-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "install-changed --install-command 'npm run fast-install' && npm run dev",
+    "dev": "vite --port 3000 --open",
+    "dev-sandbox": "vite --port 3000",
+    "fast-install": "npm i --prefer-offline --progress=false --no-audit --no-fund",
+    "http-dev": "npx --yes http-server -p 3000 -o .",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "tsc -p jsconfig.json",
+    "install-latest": "npm i --no-fund $(bun --silent ./scripts/install-latest.ts) && npx @biomejs/biome migrate"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
+    "@types/preact-custom-element": "^4.0.4",
+    "bun": "^1.1.27",
+    "install-changed": "^1.1.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.3"
+  },
+  "dependencies": {
+    "htm": "^3.1.1",
+    "preact": "^10.23.2",
+    "preact-custom-element": "^4.3.0"
+  }
+}
