@@ -3,9 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="site.css" />
+    <script>
+      // 3. API key
+      window.gapi_loaded = Promise.withResolvers();
+      window.gapi_onload = () => gapi.client.init({
+        apiKey: 'AIzaSyDcEOk_b_K82NhcmI1CEOpOWMX0VEIULso' 
+      }).then(() => window.gapi_loaded.resolve());
+    </script>
+    <script async fetchpriority="high" src="https://apis.google.com/js/client.js"></script>
   </head>
   <body>
-    <hello-world></hello-world>
+    <app-main></app-main>
     <script type="importmap">
       {
         "imports": {
