@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'https://esm.sh/preact/hooks';
-// import { useState } from 'https://esm.sh/preact/hooks';
 import register from 'https://esm.sh/preact-custom-element';
 import { html } from 'https://esm.sh/htm/preact';
 
@@ -39,7 +38,7 @@ const Page = () => {
 
   /**
    * Fetch file
-   * @type {[{id: string; name: string} | undefined, function]}
+   * @type {[DriveFile | undefined, (value: DriveFile) => void]}
    */
   const [file, setFile] = useState();
 

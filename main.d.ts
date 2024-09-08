@@ -94,7 +94,7 @@ type BaseFile = {
   size: number;
 };
 
-type Document = BaseFile & {
+type DriveDocument = BaseFile & {
   mimeType: 'application/vnd.google-apps.document';
 };
 
@@ -106,7 +106,7 @@ type DriveFile =
       driveId: string;
       parents?: [string]; // Parents is optional for shared drives
     })
-  | Document // Allows type narrowing
+  | DriveDocument // Allows type narrowing
   | (BaseFile & {
       mimeType:
         | 'application/vnd.google-apps.document'

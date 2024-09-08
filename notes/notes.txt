@@ -3,11 +3,17 @@ Presentation V1
 - This is what we are going to build
 - I'm using Preact for the sake of speed, but it doesn't have to be you could use web components, lit, or just vanilla js. This project has no build process.
 
-I have this doc
-- I want to render it
-  https://docs.google.com/document/d/1VDTyWNVCspD2mMC-IQQUtgf8HyLUe37C6G87TheqJhI/preview#heading=h.dblxd28nzo88
+I want to render this doc
+https://docs.google.com/document/d/1VDTyWNVCspD2mMC-IQQUtgf8HyLUe37C6G87TheqJhI/edit
+- Static data
+- Fetch data
+- Tie it to route
+
+I want to render this tree
+https://drive.google.com/drive/folders/1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q
 - Static data
 - Fetch data
 
 
-I want to have this tree
+Final
+- Go to https://wiki.new to create a new wiki

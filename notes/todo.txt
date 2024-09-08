@@ -1,5 +1,8 @@
 Components
-- Page []
+- Page [x]
   - Get public data
 - Tree []
 - Search []
+
+Dev
+- Setup tsc check
