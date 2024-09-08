@@ -1,0 +1,4 @@
+Presentation
+- This is what we are going to build
+- I'm using Preact for the sake of speed, but it doesn't have to be you could use web components, lit, or just vanilla js. This project has no build process.
+

@@ -12,9 +12,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "tsc -p jsconfig.json",
-    "install-latest": "npm i --no-fund $(bun --silent ./scripts/install-latest.ts)"
+    "install-latest": "npm i --no-fund $(bun --silent ./scripts/install-latest.ts) && npx @biomejs/biome migrate"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
     "@types/preact-custom-element": "^4.0.4",
     "bun": "^1.1.27",
     "install-changed": "^1.1.0",
