@@ -21,6 +21,15 @@ body {
   margin: 0;
 }
 
+.wrapper > ul {
+  padding-left: 1rem;
+}
+
+ul {
+  padding-left: 1rem;
+  list-style: none;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

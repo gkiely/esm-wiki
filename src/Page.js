@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'https://esm.sh/preact/hooks';
-import register from 'https://esm.sh/preact-custom-element';
 import { html } from 'https://esm.sh/htm/preact';
 
 // 4. Fetch content
@@ -35,6 +34,7 @@ const Page = ({ id = '' }) => {
   // 4.1 Fetch content
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   /**
    * Fetch file
@@ -46,9 +46,17 @@ const Page = ({ id = '' }) => {
   // Edit button
   // Refresh on focus
   useEffect(() => {
-    const onFocus = () => {
-      fetchContent({ id }).then(setContent).catch(setError);
-      fetchFile({ id }).then(setFile).catch(setError);
+    /**
+     * Focus event
+     * @param {FocusEvent} [e]
+     */
+    const onFocus = (e) => {
+      if (!e) {
+        setLoading(true);
+      }
+      Promise.all([fetchContent({ id }).then(setContent), fetchFile({ id }).then(setFile)])
+        .then(() => setLoading(false))
+        .catch(setError);
     };
     onFocus();
 
@@ -56,7 +64,7 @@ const Page = ({ id = '' }) => {
     return () => {
       window.removeEventListener('focus', onFocus);
     };
-  }, []);
+  }, [id]);
 
   // 6. Pressing e will open the edit link
   useEffect(() => {
@@ -81,6 +89,7 @@ const Page = ({ id = '' }) => {
       <a target="_blank" href="https://docs.google.com/document/d/${id}/edit">Edit</a>
       <h1>${file?.name}</h1>
       <p class="content">
+      ${loading ? 'Loading...' : ''}
       ${content ? html`<div dangerouslySetInnerHTML=${{ __html: content }}></div>` : ''}
       </p>
     </div>

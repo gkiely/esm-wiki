@@ -5,12 +5,12 @@ Components
   - Edit button [x]
   - Refresh on change focus [x]
 - Tree []
-  - Static
-    - heroicons?
-  - Recursive request
-  - Recursive react component
-- Deploy
+  - Single request [x]
+  - Recursive request [x]
+  - Icons [x]
 - Search? []
+- Prev/next
+- Deploy
 
 
 Dev

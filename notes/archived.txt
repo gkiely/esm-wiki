@@ -1,0 +1,25 @@
+
+  // 8. Left and right navigation (find next file based on the current id)
+  // useEffect(() => {
+  //   /**
+  //    * @param {KeyboardEvent} event
+  //    */
+  //   const onKeyDown = (event) => {
+  //     if (event.key === 'ArrowLeft') {
+  //       const prev = document.querySelector('a[rel="prev"]');
+  //       if (prev instanceof HTMLAnchorElement) {
+  //         prev.click();
+  //       }
+  //     } else if (event.key === 'ArrowRight') {
+  //       const next = document.querySelector('a[rel="next"]');
+  //       if (next instanceof HTMLAnchorElement) {
+  //         next.click();
+  //       }
+  //     }
+  //   };
+
+  //   window.addEventListener('keydown', onKeyDown);
+  //   return () => {
+  //     window.removeEventListener('keydown', onKeyDown);
+  //   };
+  // }, []);

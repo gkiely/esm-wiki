@@ -8,10 +8,6 @@ declare module 'https://esm.sh/htm/preact' {
   export * from 'htm/preact';
 }
 
-// declare module 'https://esm.sh/preact-iso' {
-//   export * from 'preact-iso';
-// }
-
 declare module 'https://esm.sh/wouter-preact' {
   export * from 'wouter-preact';
 }
@@ -204,6 +200,15 @@ type Params = {
 };
 
 type DriveAPI = {
+  Export: {
+    options: {
+      path: `https://www.googleapis.com/drive/v3/files/${string}/export`;
+      params: Params & {
+        mimeType: ExportMimeType;
+      };
+    };
+    response: GapiResponse<{ body: string }>;
+  };
   Get: {
     options: {
       path: `https://www.googleapis.com/drive/v3/files/${string}`;
@@ -213,14 +218,16 @@ type DriveAPI = {
     };
     response: GapiResponse<DriveFile>;
   };
-  Export: {
+  List: {
     options: {
-      path: `https://www.googleapis.com/drive/v3/files/${string}/export`;
+      path: 'https://www.googleapis.com/drive/v3/files';
       params: Params & {
-        mimeType: ExportMimeType;
+        q: string;
+        orderBy?: 'folder,name_natural';
+        pageSize?: number;
       };
     };
-    response: GapiResponse<{ body: string }>;
+    response: GapiResponse<{ files: DriveFile[]; nextPageToken?: string }>;
   };
 };
 
@@ -231,6 +238,7 @@ declare const gapi: {
     request: {
       (options: DriveAPI['Get']['options']): DriveAPI['Get']['response'];
       (options: DriveAPI['Export']['options']): DriveAPI['Export']['response'];
+      (options: DriveAPI['List']['options']): DriveAPI['List']['response'];
     };
   };
 };
