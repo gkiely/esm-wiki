@@ -133,8 +133,6 @@ const Page = ({ folderId = '', id = '' }) => {
     : files.filter((o) => o.parents?.[0] === lastSibling?.id);
   const parent = files.find((o) => o.id === file?.parents?.[0]);
   const prev = prevSiblingChildren[prevSiblingChildren.length - 1] ?? prevSibling ?? parent;
-
-  // const nextSibling = siblings[fileIndex + 1] ?? siblings[0];
   const parentFolders = files.filter((o) => o.parents?.[0] === parent?.parents?.[0]);
   const parentIndex = parentFolders.findIndex((o) => o.id === parent?.id);
   const next = children[0] ?? siblings[fileIndex + 1] ?? parentFolders[parentIndex + 1] ?? parentFolders[0];
