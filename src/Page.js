@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'https://esm.sh/preact/hooks';
 import { html } from 'https://esm.sh/htm/preact';
-import { filesSignal } from './signals';
-import { StaticTree } from './Tree';
+import { filesSignal } from './signals.js';
+import { StaticTree } from './Tree.js';
 import { Link, useLocation } from 'https://esm.sh/wouter-preact';
 
 // https://github.com/n3r4zzurr0/svg-spinners/blob/main/svg-css/90-ring-with-bg.svg

@@ -1,7 +1,7 @@
 import { html } from 'https://esm.sh/htm/preact';
 import { useEffect, useState } from 'https://esm.sh/preact/hooks';
 import { Link } from 'https://esm.sh/wouter-preact';
-import { filesSignal } from './signals';
+import { filesSignal } from './signals.js';
 
 const Folder = () => html`
   <div style="display: flex; flex: 1 0 1rem; max-width: 1rem; margin-top: 2px;">

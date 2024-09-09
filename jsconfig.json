@@ -7,6 +7,9 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "esModuleInterop": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
 
     // Language settings
     "strict": true,
