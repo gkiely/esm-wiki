@@ -8,7 +8,7 @@
     "dev": "vite --port 3000 --open",
     "dev-sandbox": "vite --port 3000",
     "fast-install": "npm i --prefer-offline --progress=false --no-audit --no-fund",
-    "http-dev": "npx --yes http-server -p 3000 -o .",
+    "http-dev": "npx --yes http-server --port 3000 --proxy 'http://localhost:3000?' -a localhost -o",
     "build": "vite build",
     "preview": "vite preview",
     "check": "tsc -p jsconfig.json",
