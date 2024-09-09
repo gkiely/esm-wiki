@@ -12,6 +12,10 @@ declare module 'https://esm.sh/wouter-preact' {
   export * from 'wouter-preact';
 }
 
+declare module 'https://esm.sh/@preact/signals' {
+  export * from '@preact/signals';
+}
+
 type Token = {
   access_token: string;
   expires_in: number;

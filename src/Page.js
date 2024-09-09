@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'https://esm.sh/preact/hooks';
 import { html } from 'https://esm.sh/htm/preact';
+import { fileSignal, filesSignal } from './signals';
 
 // 4. Fetch content
 // https://developers.google.com/drive/api/reference/rest/v3/files/export
@@ -59,7 +60,10 @@ const Page = ({ id = '' }) => {
         fetchContent({ id })
           .then(setContent)
           .catch(() => setContent('')),
-        fetchFile({ id }).then(setFile),
+        fetchFile({ id }).then((file) => {
+          fileSignal.value = file;
+          setFile(file);
+        }),
       ])
         .then(() => setLoading(false))
         .catch(setError);
@@ -97,6 +101,7 @@ const Page = ({ id = '' }) => {
       <p class="content">
       ${loading ? 'Loading...' : ''}
       ${content ? html`<div dangerouslySetInnerHTML=${{ __html: content }}></div>` : ''}
+      ${file?.mimeType === 'application/vnd.google-apps.folder' ? filesSignal.value.filter((o) => o.parents?.[0] === file.id).map((o) => o.name) : null}
       </p>
     </div>
   `;

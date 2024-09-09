@@ -1,6 +1,7 @@
 import { html } from 'https://esm.sh/htm/preact';
 import { useEffect, useState } from 'https://esm.sh/preact/hooks';
 import { Link } from 'https://esm.sh/wouter-preact';
+import { filesSignal } from './signals';
 
 const Folder = () => html`
   <div style="display: flex; width: 1rem; margin-top: 2px;">
@@ -54,7 +55,12 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
   const [files, setFiles] = useState();
 
   useEffect(() => {
-    fetchFiles(folderId).then(setFiles).catch(console.error);
+    fetchFiles(folderId)
+      .then((files) => {
+        filesSignal.value.push(...files);
+        setFiles(files);
+      })
+      .catch(console.error);
   }, []);
 
   return html`
