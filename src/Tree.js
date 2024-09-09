@@ -64,6 +64,7 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
 
   useEffect(() => {
     fetchFiles(folderId)
+      .then((files) => files.filter((file) => file.name !== 'wiki.logo' && file.name !== 'wiki.page'))
       .then((files) => {
         setFiles(files);
         // 9. Signals
@@ -80,7 +81,7 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
         <li>
           <${Link} href="/${rootFolderId}/${file.id}" key={file.id} style="display: flex; gap: .5rem; align-items: center;">
             ${getIcon(file.mimeType, file.iconLink)}
-            ${file.name}
+            ${file.id === id ? html`<strong>${file.name}</strong>` : file.name}
           </${Link}>
           ${
             file.mimeType === 'application/vnd.google-apps.folder'
@@ -101,15 +102,16 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
  *
  * @param {object} props
  * @param {DriveFile[]} props.files
+ * @param {string} props.folderId
  * @returns
  */
-export const StaticTree = ({ files }) => {
+export const StaticTree = ({ files, folderId = '' }) => {
   return html`
     <ul>
       ${files?.map((file) => {
         return html`
         <li>
-          <${Link} href="/${file.id}" key={file.id} style="display: flex; gap: .5rem; align-items: center;">
+          <${Link} href="/${folderId}/${file.id}" key={file.id} style="display: flex; gap: .5rem; align-items: center;">
             ${getIcon(file.mimeType, file.iconLink)}
             ${file.name}
           </${Link}>
