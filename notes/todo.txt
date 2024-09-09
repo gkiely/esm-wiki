@@ -9,9 +9,9 @@ Components
   - Recursive request [x]
   - Icons [x]
 - tsc [x]
-- Get signals working []
+- Get signals working [x]
 - Tree v2 []
-  - folder shows children []
+  - folder shows children [x]
   - Prev/next
 - Search []
 - Deploy []

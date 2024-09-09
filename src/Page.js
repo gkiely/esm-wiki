@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'https://esm.sh/preact/hooks';
 import { html } from 'https://esm.sh/htm/preact';
+import { filesSignal } from './signals';
+import { StaticTree } from './Tree';
 
 // 4. Fetch content
 // https://developers.google.com/drive/api/reference/rest/v3/files/export
@@ -63,8 +65,8 @@ const Page = ({ id = '' }) => {
           setFile(file);
         }),
       ])
-        .then(() => setLoading(false))
-        .catch(setError);
+        .catch(() => setError('Failed to fetch content'))
+        .finally(() => setLoading(false));
     };
     onFocus();
 
@@ -91,14 +93,18 @@ const Page = ({ id = '' }) => {
     };
   }, [id]);
 
+  // 9.2 Static tree
+  const children = file ? filesSignal.value.filter((o) => o.parents?.[0] === file.id) : undefined;
+
   // 1. Static content
   return html`
     <div class="Page">
       <a target="_blank" href="https://docs.google.com/document/d/${id}/edit">Edit</a>
       <h1>${file?.name}</h1>
+      ${children && html`<${StaticTree} files=${children} />`}
       <p class="content">
-      ${loading ? 'Loading...' : ''}
-      ${content ? html`<div dangerouslySetInnerHTML=${{ __html: content }}></div>` : ''}
+        ${loading ? 'Loading...' : ''}
+        ${content ? html`<div dangerouslySetInnerHTML=${{ __html: content }}></div>` : ''}
       </p>
     </div>
   `;
