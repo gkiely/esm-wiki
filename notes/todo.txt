@@ -8,9 +8,11 @@ Components
   - Single request [x]
   - Recursive request [x]
   - Icons [x]
+  - Folder shows children []
+  - Prev/next
+- Deploy []
 - Search? []
-- Prev/next
-- Deploy
+
 
 
 Dev

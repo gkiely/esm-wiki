@@ -8,7 +8,7 @@ import Tree from './Tree.js';
 const Main = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const params = useRoute('/:folderId/:id')[1];
+  const params = useRoute('/:folderId/:id?')[1];
 
   useEffect(() => {
     gapi_loaded.promise.then(() => setLoading(false));

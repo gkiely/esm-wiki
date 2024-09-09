@@ -33,7 +33,7 @@ const fetchFile = async ({ id = '' }) => {
 const Page = ({ id = '' }) => {
   // 4.1 Fetch content
   const [content, setContent] = useState('');
-  const [error, setError] = useState('');
+  const [, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   /**
@@ -46,6 +46,7 @@ const Page = ({ id = '' }) => {
   // Edit button
   // Refresh on focus
   useEffect(() => {
+    if (!id) return;
     /**
      * Focus event
      * @param {FocusEvent} [e]
@@ -54,7 +55,12 @@ const Page = ({ id = '' }) => {
       if (!e) {
         setLoading(true);
       }
-      Promise.all([fetchContent({ id }).then(setContent), fetchFile({ id }).then(setFile)])
+      Promise.allSettled([
+        fetchContent({ id })
+          .then(setContent)
+          .catch(() => setContent('')),
+        fetchFile({ id }).then(setFile),
+      ])
         .then(() => setLoading(false))
         .catch(setError);
     };

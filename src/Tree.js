@@ -33,7 +33,21 @@ const fetchFiles = async (id = '') => {
   return response.result.files;
 };
 
-const Tree = ({ id = '', folderId = '', rootFolderId = '', rootFileId = '' }) => {
+const getIcon = (mimeType = '', iconLink = '') => {
+  if (mimeType === 'application/vnd.google-apps.folder') {
+    return html`<${Folder} />`;
+  }
+
+  if (mimeType === 'application/vnd.google-apps.document') {
+    return html`<${Document} />`;
+  }
+
+  return iconLink
+    ? html`<img src=${iconLink.replace('16', '32')} alt=${mimeType} style="width: 1rem; height: 1rem;" />`
+    : null;
+};
+
+const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
   /**
    * @type {[DriveFile[] | undefined, (value: DriveFile[]) => void]}
    */
@@ -45,18 +59,18 @@ const Tree = ({ id = '', folderId = '', rootFolderId = '', rootFileId = '' }) =>
 
   return html`
     <ul>
+      ${rootFolderId === folderId ? html`<li><${Link} href="/${folderId}" style="display: flex; gap: .5rem; align-items: center;">🏠 Home</${Link}></li>` : null}
       ${files?.map((file) => {
         return html`
         <li>
           <${Link} href="/${rootFolderId}/${file.id}" key={file.id} style="display: flex; gap: .5rem; align-items: center;">
-            ${file.mimeType === 'application/vnd.google-apps.folder' ? html`<${Folder} />` : null}
-            ${file.mimeType === 'application/vnd.google-apps.document' ? html`<${Document} />` : null}
+            ${getIcon(file.mimeType, file.iconLink)}
             ${file.name}
           </${Link}>
           ${
             file.mimeType === 'application/vnd.google-apps.folder'
               ? html`
-            <${Tree} id=${id} folderId=${file.id} rootFolderId=${folderId}  />
+            <${Tree} id=${id} folderId=${file.id} rootFolderId=${rootFolderId}  />
           `
               : null
           }
