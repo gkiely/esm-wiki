@@ -74,7 +74,7 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
 
   return html`
     <ul>
-      ${rootFolderId === folderId ? html`<li><${Link} href="/${folderId}" style="display: flex; gap: .5rem; align-items: center;">🏠 Home</${Link}></li>` : null}
+      ${rootFolderId === folderId ? html`<li><${Link} href="/${folderId}/${folderId}" style="display: flex; gap: .5rem; align-items: center;">🏠 Home</${Link}></li>` : null}
       ${files?.map((file) => {
         return html`
         <li>
