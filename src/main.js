@@ -21,7 +21,7 @@ const Main = () => {
   return html`
     <div class="wrapper">
       <${Tree} folderId=${params?.folderId} id=${params?.id} />
-      <${Page} id=${params?.id} />
+      <${Page} folderId=${params?.folderId} id=${params?.id} />
     </div>
   `;
 };

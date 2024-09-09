@@ -12,8 +12,8 @@ Components
 - Get signals working [x]
 - Tree v2 []
   - folder shows children [x]
-  - Prev/next
-- Search []
+  - Prev/next [x]
+  - Keyboard shortcut []
 - Deploy []
 
 

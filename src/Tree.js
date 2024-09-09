@@ -64,6 +64,7 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
 
   useEffect(() => {
     fetchFiles(folderId)
+      .then((files) => files.filter((file) => file.name !== 'wiki.logo'))
       .then((files) => {
         setFiles(files);
         // 9. Signals
