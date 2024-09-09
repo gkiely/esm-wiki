@@ -14,5 +14,11 @@ Components
   - folder shows children [x]
   - Prev/next [x]
   - Keyboard shortcut [x]
+- Clean up git history []
+- Updates slides []
+- Send email []
+
+
+Bonus
 - Deploy []
 

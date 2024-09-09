@@ -1,4 +1,3 @@
-import { signal } from 'https://esm.sh/@preact/signals';
 import { html } from 'https://esm.sh/htm/preact';
 import { useEffect, useState } from 'https://esm.sh/preact/hooks';
 import { Link } from 'https://esm.sh/wouter-preact';

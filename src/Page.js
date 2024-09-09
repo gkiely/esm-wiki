@@ -140,8 +140,11 @@ const Page = ({ folderId = '', id = '' }) => {
   // 11. Prev/Next keyboard navigation
   const setLocation = useLocation()[1];
 
+  /**
+   * @type {(event: KeyboardEvent) => void}
+   */
   const onKeyDown = useCallback(
-    (/** @type {KeyboardEvent} */ event) => {
+    (event) => {
       if (event.key === 'ArrowLeft' && prev) {
         setLocation(`/${folderId}/${prev.id}`);
       }
