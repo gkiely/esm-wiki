@@ -16,8 +16,8 @@ Components
   - Keyboard shortcut [x]
 - Clean up git history [x]
 - Updates slides [x]
-- render iframe []
-- Send email []
+- render iframe [x]
+- Send email [x]
 
 
 Bonus
