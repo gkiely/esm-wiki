@@ -15,6 +15,38 @@ const Spinner = () => html`
   </span>
 `;
 
+/**
+ * @param {string} url
+ */
+function getDomain(url) {
+  const hostname = new URL(url).hostname;
+  const parts = hostname.split('.');
+  return parts.length > 2 ? parts.slice(-2).join('.') : hostname;
+}
+
+const whitelist = ['youtube.com', 'loom.com', 'google.com', 'docs.google.com', 'drive.google.com'];
+/**
+ * Parses iframe content
+ * @param {string} html
+ */
+const parseContent = (html = '') => {
+  console.log(html);
+  return html.replace(
+    /(&lt;div((?!&gt;).)*&gt;)?&lt;iframe((?!&gt;).)*&gt;(&lt;\/iframe&gt;)(&lt;\/div&gt;)?/g,
+    (str) => {
+      const match = str.replace(/&quot;/g, '"').match(/src="([^"]+)"/)?.[1];
+      const url = match ? getDomain(match) : undefined;
+      if (url && whitelist.includes(url)) {
+        return str
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+          .replace(/&quot;/g, '"');
+      }
+      return str;
+    }
+  );
+};
+
 // 4. Fetch content
 // https://developers.google.com/drive/api/reference/rest/v3/files/export
 const fetchContent = async ({ id = '' }) => {
@@ -28,7 +60,7 @@ const fetchContent = async ({ id = '' }) => {
     },
   });
 
-  return response.body;
+  return parseContent(response.body);
 };
 
 const fetchFile = async ({ id = '' }) => {
