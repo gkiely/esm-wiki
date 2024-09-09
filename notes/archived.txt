@@ -1,0 +1,39 @@
+
+  // 8. Left and right navigation (find next file based on the current id)
+  // useEffect(() => {
+  //   /**
+  //    * @param {KeyboardEvent} event
+  //    */
+  //   const onKeyDown = (event) => {
+  //     if (event.key === 'ArrowLeft') {
+  //       const prev = document.querySelector('a[rel="prev"]');
+  //       if (prev instanceof HTMLAnchorElement) {
+  //         prev.click();
+  //       }
+  //     } else if (event.key === 'ArrowRight') {
+  //       const next = document.querySelector('a[rel="next"]');
+  //       if (next instanceof HTMLAnchorElement) {
+  //         next.click();
+  //       }
+  //     }
+  //   };
+
+  //   window.addEventListener('keydown', onKeyDown);
+  //   return () => {
+  //     window.removeEventListener('keydown', onKeyDown);
+  //   };
+  // }, []);
+
+${file?.mimeType === 'application/vnd.google-apps.folder' ? filesSignal.value.filter((o) => o.parents?.[0] === file.id).map((o) => o.name) : null}
+
+import { createContext } from 'https://esm.sh/preact';
+/**
+ * @type {preact.Context<{ files: DriveFile[]; file: DriveFile | undefined }>}
+ */
+const Context = createContext({
+  /** @type {DriveFile[]} */
+  files: [],
+  /** @type {DriveFile | undefined} */
+  file: undefined,
+});
+<${Context.Provider} value=${{ files: [], file: undefined }}>

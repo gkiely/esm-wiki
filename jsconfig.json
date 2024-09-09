@@ -1,12 +1,18 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "incremental": true,
     "checkJs": true,
     "allowJs": true,
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+    // Language settings
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "useUnknownInCatchVariables": true,
+    "allowUnreachableCode": false,
   },
   "include": ["src/**/*.js", "main.d.ts"],
   "exclude": ["node_modules"],

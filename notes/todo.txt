@@ -4,14 +4,24 @@ Components
   - Route passes id to page [x]
   - Edit button [x]
   - Refresh on change focus [x]
-- Tree []
-  - Static
-    - heroicons?
-  - Recursive request
-  - Recursive react component
-- Deploy
-- Search? []
+- Tree [x]
+  - Single request [x]
+  - Recursive request [x]
+  - Icons [x]
+- tsc [x]
+- Get signals working []
+- Tree v2 []
+  - folder shows children []
+  - Prev/next
+- Search []
+- Deploy []
+
 
 
 Dev
 - Setup tsc check
+
+Bonus
+- Get signals working?
+  - Get a super basic example working []
+  - Build up from there []
