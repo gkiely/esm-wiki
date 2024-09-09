@@ -15,7 +15,6 @@ https://drive.google.com/drive/folders/1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q
 - Fetch data
 
 
-
 History
 34f796c (HEAD -> main, origin/main) cleaned up
 385171d working prev/next

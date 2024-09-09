@@ -1,0 +1,70 @@
+Today I want to show you how to make your own wiki interface with Google Drive and Docs.
+
+We have a lot to cover so I will be going quickly, but the code will be available on github after the talk.
+
+I'll be using a library called Preact, which is a lightweight version of React. It's a great way to do interactive web development without a build step.
+
+We are going to start by rendering a Google Doc, then creating a recursive tree component. If you've never seen a recursive component before they are very cool.
+
+Let's go ahead and start with a blank slate.
+
+I'm starting with some html markup that initializes our api key. I am not going to show you to set up an api key today, but you can find that information in the Google Drive API documentation.
+
+Page
+---
+I'm also starting with some static markup for my page title and html.
+
+
+Here I have a file that I want to request.
+
+The first thing we need to do is fetch our file with the Google Drive API.
+
+I also want to get the content of the document, so I will make a request for that.
+
+Great, so we can see the content, but it's just pointing to that single file, so lets update it to be dynamic.
+
+Great that's working.
+
+Now I also want it to update on focus, so when I make change to a file it is updated in the UI.
+
+Great.
+
+Tree
+---
+Ok now onto the tree component.
+
+Now onto the Tree component. We are going to start by creating a new file called `Tree.js`.
+
+I'm starting here with some static markup and a folder icon.
+
+First things first, let's make a request to get our files.
+
+Once we have them, we can render those files.
+
+Now notice that this only returns the first level of files. So now is when we are going to use the recursive component.
+
+If the file is a folder, we want to render another Tree.
+
+That tree will make another request, and that will render a nested tree.
+
+
+Great.
+
+The only other thing I want to add is a single level tree for the folder view.
+
+I also want to add a previous and next button.
+
+
+Single level tree
+---
+The single level tree is simple to add, we just copy and paste the existing logic.
+
+
+Prev/Next
+---
+The logic for prev and next is a little bit complex, so I am just going to copy some code that I prepared earlier.
+
+
+
+
+

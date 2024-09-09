@@ -20,3 +20,6 @@ Components
 - Send email [x]
 - Deploy [x]
 
+- Open new branch, add comments to code []
+- Record yourself doing it []
+

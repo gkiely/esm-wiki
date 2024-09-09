@@ -4,43 +4,8 @@ import { filesSignal } from './signals.js';
 import { StaticTree } from './Tree.js';
 import { Link, useLocation } from 'https://esm.sh/wouter-preact';
 import { Folder, Pencil, Spinner } from './icons.js';
-
-/**
- * @param {string} url
- */
-function getDomain(url) {
-  const hostname = new URL(url).hostname;
-  const parts = hostname.split('.');
-  return parts.length > 2 ? parts.slice(-2).join('.') : hostname;
-}
-
-const whitelist = ['youtube.com', 'loom.com', 'google.com', 'docs.google.com', 'drive.google.com'];
-/**
- * Parses iframe content
- * @param {string} html
- */
-const parseContent = (html = '') => {
-  console.log(html);
-  return (
-    html
-      .replace(/(&lt;div((?!&gt;).)*&gt;)?&lt;iframe((?!&gt;).)*&gt;(&lt;\/iframe&gt;)(&lt;\/div&gt;)?/g, (str) => {
-        const match = str.replace(/&quot;/g, '"').match(/src="([^"]+)"/)?.[1];
-        const url = match ? getDomain(match) : undefined;
-        if (url && whitelist.includes(url)) {
-          return str
-            .replace(/&lt;/g, '<')
-            .replace(/&gt;/g, '>')
-            .replace(/&quot;/g, '"');
-        }
-        return str;
-      })
-      // Code block
-      .replace(/<p[^>]*><span[^>]*>&#60419;[^<]*<\/span>(?:(?!&#60418;).)*&#60418;<\/span><\/p>/g, (str) => {
-        const output = str.replace('&#60419;', '').replace('&#60418;', '');
-        return /*html*/ `<div class="code">${output}</div>`;
-      })
-  );
-};
+import { getPrevNext } from './getPrevNext.js';
+import { parseContent } from './parseContent.js';
 
 // 4. Fetch content
 // https://developers.google.com/drive/api/reference/rest/v3/files/export
@@ -54,10 +19,11 @@ const fetchContent = async ({ id = '' }) => {
       includeItemsFromAllDrives: true,
     },
   });
-
   return parseContent(response.body);
 };
 
+// Fetch file
+// https://developers.google.com/drive/api/reference/rest/v3/files/get
 const fetchFile = async ({ id = '' }) => {
   const response = await gapi.client.request({
     path: `https://www.googleapis.com/drive/v3/files/${id}`,
@@ -101,10 +67,12 @@ const Page = ({ folderId = '', id = '' }) => {
         const file = files.find((o) => o.id === id);
         if (file) {
           setFile(file);
-          fetchContent({ id })
-            .then(setContent)
-            .catch(() => setContent(''))
-            .finally(() => setLoading(false));
+          file.mimeType === 'application/vnd.google-apps.folder'
+            ? Promise.resolve('')
+            : fetchContent({ id })
+                .then(setContent)
+                .catch(() => setContent(''))
+                .finally(() => setLoading(false));
           return;
         }
       }
@@ -151,18 +119,7 @@ const Page = ({ folderId = '', id = '' }) => {
       : [];
 
   // 10. Prev/Next
-  const siblings = files.filter((o) => o.parents?.[0] === file?.parents?.[0]);
-  const lastSibling = siblings[siblings.length - 1];
-  const fileIndex = siblings.findIndex((o) => o.id === id);
-  const prevSibling = siblings[fileIndex - 1];
-  const prevSiblingChildren = prevSibling
-    ? files.filter((o) => o.parents?.[0] === prevSibling.id)
-    : files.filter((o) => o.parents?.[0] === lastSibling?.id);
-  const parent = files.find((o) => o.id === file?.parents?.[0]);
-  const prev = prevSiblingChildren[prevSiblingChildren.length - 1] ?? prevSibling ?? parent;
-  const parentFolders = files.filter((o) => o.parents?.[0] === parent?.parents?.[0]);
-  const parentIndex = parentFolders.findIndex((o) => o.id === parent?.id);
-  const next = children[0] ?? siblings[fileIndex + 1] ?? parentFolders[parentIndex + 1] ?? parentFolders[0];
+  const { prev, next } = getPrevNext({ file, files, id });
 
   // 11. Prev/Next keyboard navigation
   const setLocation = useLocation()[1];
@@ -192,8 +149,8 @@ const Page = ({ folderId = '', id = '' }) => {
   // 1. Static content
   return html`
     <div class="Page">
-      ${file?.mimeType === 'application/vnd.google-apps.folder' && html`<a target="_blank" style="display: flex; align-items: center; gap: .3rem;" href="https://drive.google.com/drive/folders/${file.id}"><${Folder} /> View in Drive</a>`}
-      ${file?.mimeType === 'application/vnd.google-apps.document' && html`<a target="_blank" style="display: flex; align-items: center; gap: .3rem;" href="https://docs.google.com/document/d/${file.id}/edit"><${Pencil} /> Edit</a>`}
+      ${file?.mimeType === 'application/vnd.google-apps.folder' && html`<a target="_blank" class="button" href="https://drive.google.com/drive/folders/${file.id}"><${Folder} /> View in Drive</a>`}
+      ${file?.mimeType === 'application/vnd.google-apps.document' && html`<a target="_blank" class="button" href="https://docs.google.com/document/d/${file.id}/edit"><${Pencil} /> Edit</a>`}
       <h1>${file?.name}</h1>
       <p class="content">
         ${loading ? html`<${Spinner} />` : ''}
