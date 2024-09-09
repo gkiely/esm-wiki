@@ -13,15 +13,6 @@ Components
 - Tree v2 []
   - folder shows children [x]
   - Prev/next [x]
-  - Keyboard shortcut []
+  - Keyboard shortcut [x]
 - Deploy []
 
-
-
-Dev
-- Setup tsc check
-
-Bonus
-- Get signals working?
-  - Get a super basic example working []
-  - Build up from there []
