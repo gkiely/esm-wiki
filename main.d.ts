@@ -16,6 +16,10 @@ declare module 'https://esm.sh/@preact/signals' {
   export * from '@preact/signals';
 }
 
+declare module 'https://esm.sh/preact' {
+  export * from 'preact';
+}
+
 type Token = {
   access_token: string;
   expires_in: number;

@@ -18,7 +18,7 @@ const Main = () => {
   if (loading) return html`<div>Loading...</div>`;
   if (error) return html`<div>Error: ${error}</div>`;
 
-  return html`      
+  return html`
     <div class="wrapper">
       <${Tree} folderId=${params?.folderId} id=${params?.id} />
       <${Page} id=${params?.id} />

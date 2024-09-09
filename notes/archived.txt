@@ -23,3 +23,17 @@
   //     window.removeEventListener('keydown', onKeyDown);
   //   };
   // }, []);
+
+${file?.mimeType === 'application/vnd.google-apps.folder' ? filesSignal.value.filter((o) => o.parents?.[0] === file.id).map((o) => o.name) : null}
+
+import { createContext } from 'https://esm.sh/preact';
+/**
+ * @type {preact.Context<{ files: DriveFile[]; file: DriveFile | undefined }>}
+ */
+const Context = createContext({
+  /** @type {DriveFile[]} */
+  files: [],
+  /** @type {DriveFile | undefined} */
+  file: undefined,
+});
+<${Context.Provider} value=${{ files: [], file: undefined }}>

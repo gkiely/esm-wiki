@@ -8,8 +8,7 @@ Components
   - Single request [x]
   - Recursive request [x]
   - Icons [x]
-  - Folder shows children []
-  - Prev/next
+
 - Deploy []
 - Search? []
 
@@ -17,3 +16,8 @@ Components
 
 Dev
 - Setup tsc check
+
+Bonus
+- Get signals working?
+  - Folder shows children []
+  - Prev/next
