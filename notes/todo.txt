@@ -4,11 +4,10 @@ Components
   - Route passes id to page [x]
   - Edit button [x]
   - Refresh on change focus [x]
-- Tree []
+- Tree [x]
   - Single request [x]
   - Recursive request [x]
   - Icons [x]
-
 - Deploy []
 - Search? []
 
@@ -19,5 +18,7 @@ Dev
 
 Bonus
 - Get signals working?
+  - Get a super basic example working []
+  - Build up from there []
   - Folder shows children []
-  - Prev/next
+  - Prev/next []
