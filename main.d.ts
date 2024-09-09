@@ -8,6 +8,14 @@ declare module 'https://esm.sh/htm/preact' {
   export * from 'htm/preact';
 }
 
+// declare module 'https://esm.sh/preact-iso' {
+//   export * from 'preact-iso';
+// }
+
+declare module 'https://esm.sh/wouter-preact' {
+  export * from 'wouter-preact';
+}
+
 type Token = {
   access_token: string;
   expires_in: number;

@@ -31,7 +31,7 @@ const fetchFile = async ({ id = '' }) => {
   return response.result;
 };
 
-const Page = () => {
+const Page = ({ id = '' }) => {
   // 4.1 Fetch content
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
@@ -42,14 +42,43 @@ const Page = () => {
    */
   const [file, setFile] = useState();
 
+  // 5.
+  // Edit button
+  // Refresh on focus
   useEffect(() => {
-    fetchContent({ id: '1VDTyWNVCspD2mMC-IQQUtgf8HyLUe37C6G87TheqJhI' }).then(setContent).catch(setError);
-    fetchFile({ id: '1VDTyWNVCspD2mMC-IQQUtgf8HyLUe37C6G87TheqJhI' }).then(setFile).catch(setError);
+    const onFocus = () => {
+      fetchContent({ id }).then(setContent).catch(setError);
+      fetchFile({ id }).then(setFile).catch(setError);
+    };
+    onFocus();
+
+    window.addEventListener('focus', onFocus);
+    return () => {
+      window.removeEventListener('focus', onFocus);
+    };
   }, []);
+
+  // 6. Pressing e will open the edit link
+  useEffect(() => {
+    /**
+     * @param {KeyboardEvent} event
+     */
+    const onKeyDown = (event) => {
+      if (event.key === 'e') {
+        window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank');
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [id]);
 
   // 1. Static content
   return html`
     <div class="Page">
+      <a target="_blank" href="https://docs.google.com/document/d/${id}/edit">Edit</a>
       <h1>${file?.name}</h1>
       <p class="content">
       ${content ? html`<div dangerouslySetInnerHTML=${{ __html: content }}></div>` : ''}
@@ -58,4 +87,4 @@ const Page = () => {
   `;
 };
 
-register(Page, 'app-page', [], { shadow: false });
+export default Page;

@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'https://esm.sh/preact/hooks';
 import register from 'https://esm.sh/preact-custom-element';
 import { html } from 'https://esm.sh/htm/preact';
-// import './Tree.js';
-import './Page.js';
+import { useRoute } from 'https://esm.sh/wouter-preact';
+import Page from './Page.js';
 
 const Main = () => {
-  // 4. Wait for gapi_loaded promise
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const params = useRoute('/:id')[1];
 
   useEffect(() => {
     gapi_loaded.promise.then(() => setLoading(false));
@@ -19,7 +19,7 @@ const Main = () => {
 
   return html`      
     <div>
-      <app-page></app-page>
+      <${Page} id=${params?.id} />
     </div>
   `;
 };
