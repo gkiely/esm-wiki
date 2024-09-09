@@ -47,6 +47,13 @@ const getIcon = (mimeType = '', iconLink = '') => {
     : null;
 };
 
+/**
+ *
+ * @param {object} props
+ * @param {string} props.id
+ * @param {string} props.folderId
+ * @param {string} props.rootFolderId
+ */
 const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
   /**
    * @type {[DriveFile[] | undefined, (value: DriveFile[]) => void]}

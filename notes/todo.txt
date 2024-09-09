@@ -8,8 +8,13 @@ Components
   - Single request [x]
   - Recursive request [x]
   - Icons [x]
+- tsc [x]
+- Get signals working []
+- Tree v2 []
+  - folder shows children []
+  - Prev/next
+- Search []
 - Deploy []
-- Search? []
 
 
 
@@ -20,5 +25,3 @@ Bonus
 - Get signals working?
   - Get a super basic example working []
   - Build up from there []
-  - Folder shows children []
-  - Prev/next []
