@@ -9,6 +9,8 @@
       // 3. API key
       window.gapi_loaded = Promise.withResolvers();
       window.gapi_onload = () => gapi.client.init({
+        // Loads the gapi loader and then asynchronously loads the client module
+        // https://github.com/google/google-api-javascript-client/issues/264#issuecomment-271196813
         apiKey: 'AIzaSyCRPGIdUo5g_2wB21Cvy3zQ1Yf1mt4L3dU' 
       }).then(() => window.gapi_loaded.resolve());
     </script>

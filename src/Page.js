@@ -69,6 +69,8 @@ const Page = ({ folderId = '', id = '' }) => {
           setFile(file);
           file.mimeType === 'application/vnd.google-apps.folder'
             ? Promise.resolve('')
+                .then(setContent)
+                .finally(() => setLoading(false))
             : fetchContent({ id })
                 .then(setContent)
                 .catch(() => setContent(''))

@@ -33,7 +33,7 @@ Tree
   - Show a deeply nested example
   https://drive.google.com/drive/folders/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
   http://localhost:3000/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
-- View in drive if folder
+- "View in drive" for folders
 
 
 Folder view
