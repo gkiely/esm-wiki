@@ -1,5 +1,5 @@
+import { render } from 'https://esm.sh/preact';
 import { useState, useEffect } from 'https://esm.sh/preact/hooks';
-import register from 'https://esm.sh/preact-custom-element';
 import { html } from 'https://esm.sh/htm/preact';
 import { useRoute } from 'https://esm.sh/wouter-preact';
 import Page from './Page.js';
@@ -29,4 +29,4 @@ const Main = () => {
   `;
 };
 
-register(Main, 'app-main', [], { shadow: false });
+render(html`<${Main} />`, document.body);
