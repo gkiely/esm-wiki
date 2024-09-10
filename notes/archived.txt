@@ -37,3 +37,6 @@ const Context = createContext({
   file: undefined,
 });
 <${Context.Provider} value=${{ files: [], file: undefined }}>
+
+import register from 'https://esm.sh/preact-custom-element';
+register(Main, 'app-main', [], { shadow: false });

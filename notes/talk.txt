@@ -12,57 +12,43 @@ I'm starting with some html markup that initializes our api key. I am not going 
 
 Page
 ---
-I'm also starting with some static markup for my page title and html.
-
-
-Here I have a file that I want to request.
-
-The first thing we need to do is fetch our file with the Google Drive API.
-
-I also want to get the content of the document, so I will make a request for that.
-
-Great, so we can see the content, but it's just pointing to that single file, so lets update it to be dynamic.
-
-Great that's working.
-
-Now I also want it to update on focus, so when I make change to a file it is updated in the UI.
-
-Great.
+- New file: Page.js
+- Static markup
+  - Title
+  - Content
+- Make request to a static ID
+  https://docs.google.com/document/d/1VDTyWNVCspD2mMC-IQQUtgf8HyLUe37C6G87TheqJhI
+- Make the request dynamic, also include folder ID in URL
+  https://drive.google.com/drive/folders/1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q
+- Edit button
+- Update on focus
 
 Tree
 ---
-Ok now onto the tree component.
-
-Now onto the Tree component. We are going to start by creating a new file called `Tree.js`.
-
-I'm starting here with some static markup and a folder icon.
-
-First things first, let's make a request to get our files.
-
-Once we have them, we can render those files.
-
-Now notice that this only returns the first level of files. So now is when we are going to use the recursive component.
-
-If the file is a folder, we want to render another Tree.
-
-That tree will make another request, and that will render a nested tree.
+- New file: Tree.js
+- Request
+- Render files in an unordered list
+- It is only the first level of files, use recursive component if it's a folder
+- Nested tree will make another request and that will render a nested tree
+  - Show a deeply nested example
+  https://drive.google.com/drive/folders/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
+  http://localhost:3000/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
+- View in drive if folder
 
 
-Great.
-
-The only other thing I want to add is a single level tree for the folder view.
-
-I also want to add a previous and next button.
-
-
-Single level tree
+Folder view
 ---
-The single level tree is simple to add, we just copy and paste the existing logic.
-
+- Single level tree, copy and paste existing logic
 
 Prev/Next
 ---
-The logic for prev and next is a little bit complex, so I am just going to copy some code that I prepared earlier.
+- Copy the logic
+
+
+Keyboard shortcuts
+---
+- Edit
+- Prev next
 
 
 

@@ -95,23 +95,6 @@ const Page = ({ folderId = '', id = '' }) => {
     };
   }, [id]);
 
-  // 6. Pressing e will open the edit link
-  useEffect(() => {
-    /**
-     * @param {KeyboardEvent} event
-     */
-    const onKeyDown = (event) => {
-      if (event.key === 'e') {
-        window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank');
-      }
-    };
-
-    window.addEventListener('keydown', onKeyDown);
-    return () => {
-      window.removeEventListener('keydown', onKeyDown);
-    };
-  }, [id]);
-
   // 9.2 Static tree
   const children =
     file && file.mimeType === 'application/vnd.google-apps.folder'
@@ -124,11 +107,15 @@ const Page = ({ folderId = '', id = '' }) => {
   // 11. Prev/Next keyboard navigation
   const setLocation = useLocation()[1];
 
+  // 6. Pressing e will open the edit link
   /**
    * @type {(event: KeyboardEvent) => void}
    */
   const onKeyDown = useCallback(
     (event) => {
+      if (event.key === 'e') {
+        window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank');
+      }
       if (event.key === 'ArrowLeft' && prev) {
         setLocation(`/${folderId}/${prev.id}`);
       }
@@ -136,7 +123,7 @@ const Page = ({ folderId = '', id = '' }) => {
         setLocation(`/${folderId}/${next.id}`);
       }
     },
-    [prev?.id, next?.id]
+    [prev?.id, next?.id, id]
   );
 
   useEffect(() => {
