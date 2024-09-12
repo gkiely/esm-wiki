@@ -1,39 +1,43 @@
 About me
 ---
-I'm a frontend engineer. I built youneedawiki.com, wiki based application built on Docs and Drive.
+I'm a frontend engineer turned founder. I built youneedawiki.com, wiki based application built on Docs and Drive.
 
 Overview
 ---
 - How to make your own wiki interface
 - Using preact, lightweight version of react. Doesn't require a build step.
 - Code will be available on github
-- Start by rendering google doc, then recursive tree component.
-- Starting with some html markup that initializes our api key.
 - I am not going into auth or setting up an api key today, but you can find that in the Google Drive API documentation.
+- Start by rendering google doc, then recursive tree component.
 - Here is the drive folder, contains some tutorials and faqs, we want to render that
+
+
+index.html
+---
+- Here is some html markup that initializes our api key
+- Import map
+
+main.js
+---
+- Waits until gapi has loaded and mounts components
 
 Page
 ---
-- Static markup
-  - Title
-  - Content
-- Make request to a static ID
-  https://docs.google.com/document/d/1VDTyWNVCspD2mMC-IQQUtgf8HyLUe37C6G87TheqJhI
-- Make the request dynamic, also include folder ID in URL
-  https://drive.google.com/drive/folders/1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q
+- Request
 
 
 Tree
 ---
-- Static markup
 - Request
-- Render files in an unordered list
-- It is only the first level of files, use recursive component if it's a folder
-- Nested tree will make another request and that will render a nested tree
-  - Show a deeply nested example
+- Render files
+- It is only the first level of files
+- Recursion
+  - Nested tree will make another request and that will render a nested tree
+- Show a deeply nested example
   https://drive.google.com/drive/folders/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
   http://localhost:3000/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
 
 
-- Show full example on: https://esm-wiki.pages.dev
+- Checkout main
+- Full example on: https://esm-wiki.pages.dev
 - Includes: folder view, prev/next, keyboard shortcuts
