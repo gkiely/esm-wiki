@@ -8,6 +8,7 @@ Overview
 - Using preact, lightweight version of react. Doesn't require a build step.
 - Code will be available on github
 - I am not going into auth or setting up an api key today, but you can find that in the Google Drive API documentation.
+- Public folders and files
 - Start by rendering google doc, then recursive tree component.
 - Here is the drive folder, contains some tutorials and faqs, we want to render that
 
