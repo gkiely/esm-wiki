@@ -1,3 +1,9 @@
+About me
+---
+I'm a frontend engineer. I built youneedawiki.com, wiki based application built on Docs and Drive.
+
+Overview
+---
 - How to make your own wiki interface
 - Using preact, lightweight version of react. Doesn't require a build step.
 - Code will be available on github
