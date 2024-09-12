@@ -35,7 +35,10 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
 
   return html`
     <ul>
-      ${rootFolderId === folderId ? html`<li><${Link} href="/${folderId}/${folderId}" style="display: flex; gap: .5rem; align-items: center;">🏠 Home</${Link}></li>` : null}
+      ${
+        '' // TODO: home link
+        // rootFolderId === folderId ? html`<li><${Link} href="/${folderId}/${folderId}" style="display: flex; gap: .5rem; align-items: center;">🏠 Home</${Link}></li>` : null
+      }
       ${files?.map((file) => {
         return html`
         <li>
@@ -45,7 +48,7 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
           </${Link}>
           ${
             '' // TODO: recursion
-            // ${file.mimeType === 'application/vnd.google-apps.folder' ? html`<${Tree} id=${id} folderId=${file.id} rootFolderId=${rootFolderId}  />` : null}
+            // file.mimeType === 'application/vnd.google-apps.folder' ? html`<${Tree} id=${id} folderId=${file.id} rootFolderId=${rootFolderId}  />` : null
           }
         </li>
       `;

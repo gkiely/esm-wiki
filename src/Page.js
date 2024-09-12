@@ -60,9 +60,13 @@ const Page = ({ folderId = '', id = '' }) => {
         ${content ? html`<div dangerouslySetInnerHTML=${{ __html: content }}></div>` : ''}
       </p>
       ${
+        ''
+        // @TODO: Folder view
+        // file?.mimeType === 'application/vnd.google-apps.folder' && html`<${StaticTree} folderId=${folderId} files=${children} />`
+      }
+
+      ${
         '' /*
-      // @TODO: Folder view
-      ${file?.mimeType === 'application/vnd.google-apps.folder' && html`<${StaticTree} folderId=${folderId} files=${children} />`}      
       // @TODO: Prev/Next
       <div class="nav">
         ${prev && html`<${Link} href="/${folderId}/${prev.id}">← ${prev.name}</${Link}>`}

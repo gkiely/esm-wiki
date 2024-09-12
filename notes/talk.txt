@@ -1,6 +1,6 @@
 About me
 ---
-I'm a frontend engineer turned founder. I built youneedawiki.com, wiki based application built on Docs and Drive.
+I'm a frontend engineer turned founder. I built youneedawiki.com, wiki based application built on Drive and Docs.
 
 Overview
 ---
@@ -27,10 +27,12 @@ Page
 - Request
 
 
+
 Tree
 ---
 - Request
-- Render files
+- Explain making request
+- Explain iterating over files
 - It is only the first level of files
 - Recursion
   - Nested tree will make another request and that will render a nested tree
