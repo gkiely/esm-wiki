@@ -10,3 +10,6 @@ https://docs.google.com/document/d/1gNx42PWUfuPK9xq8uWuSTGbxecS0hJYVLC7qp4Q0oTM/
 Deeply nested example
 https://drive.google.com/drive/folders/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
 http://localhost:3000/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
+
+Another wiki example:
+https://drive.google.com/drive/folders/16ysq_bBjlI_h6-yc7SxzyL5Swaj4xiU1

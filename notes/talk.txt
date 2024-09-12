@@ -37,8 +37,11 @@ Tree
 - Show a deeply nested example
   https://drive.google.com/drive/folders/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
   http://localhost:3000/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
+- Another wiki example:
+https://drive.google.com/drive/folders/16ysq_bBjlI_h6-yc7SxzyL5Swaj4xiU1
 
 
 - Checkout main
+- Review code
+  - Includes: folder view, prev/next, keyboard shortcuts
 - Full example on: https://esm-wiki.pages.dev
-- Includes: folder view, prev/next, keyboard shortcuts
