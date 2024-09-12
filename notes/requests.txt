@@ -1,0 +1,39 @@
+const fetchContent = async ({ id = '' }) => {
+  const response = await gapi.client.request({
+    path: `https://www.googleapis.com/drive/v3/files/${id}/export`,
+    params: {
+      fields: '*',
+      mimeType: 'text/html',
+      supportsAllDrives: true,
+      includeItemsFromAllDrives: true,
+    },
+  });
+  return parseContent(response.body);
+};
+
+
+const fetchFile = async ({ id = '' }) => {
+  const response = await gapi.client.request({
+    path: `https://www.googleapis.com/drive/v3/files/${id}`,
+    params: {
+      fields: '*',
+      supportsAllDrives: true,
+      includeItemsFromAllDrives: true,
+    },
+  });
+
+  return response.result;
+};
+
+
+const response = await gapi.client.request({
+  path: 'https://www.googleapis.com/drive/v3/files',
+  params: {
+    q: `'${id}' in parents and trashed = false`,
+    fields: '*',
+    supportsAllDrives: true,
+    includeItemsFromAllDrives: true,
+  },
+});
+
+return response.result.files;

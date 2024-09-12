@@ -1,18 +1,13 @@
-Today I want to show you how to make your own wiki interface with Google Drive and Docs.
-
-We have a lot to cover so I will be going quickly, but the code will be available on github after the talk.
-
-I'll be using a library called Preact, which is a lightweight version of React. It's a great way to do interactive web development without a build step.
-
-We are going to start by rendering a Google Doc, then creating a recursive tree component. If you've never seen a recursive component before they are very cool.
-
-Let's go ahead and start with a blank slate.
-
-I'm starting with some html markup that initializes our api key. I am not going to show you to set up an api key today, but you can find that information in the Google Drive API documentation.
+- How to make your own wiki interface
+- Lot to cover, going quickly code on github
+- Using preact, lightweight version of react. Doesn't require a build step.
+- Start by rendering google doc, then recursive tree component.
+- Starting with some html markup that initializes our api key.
+- I am not going into auth or setting up an api key today, but you can find that in the Google Drive API documentation.
+- Here is the drive folder, contains some tutorials and faqs, we want to render that
 
 Page
 ---
-- New file: Page.js
 - Static markup
   - Title
   - Content
@@ -20,12 +15,11 @@ Page
   https://docs.google.com/document/d/1VDTyWNVCspD2mMC-IQQUtgf8HyLUe37C6G87TheqJhI
 - Make the request dynamic, also include folder ID in URL
   https://drive.google.com/drive/folders/1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q
-- Edit button
-- Update on focus
+
 
 Tree
 ---
-- New file: Tree.js
+- Static markup
 - Request
 - Render files in an unordered list
 - It is only the first level of files, use recursive component if it's a folder
@@ -48,9 +42,5 @@ Prev/Next
 Keyboard shortcuts
 ---
 - Edit
+- Update on focus
 - Prev next
-
-
-
-
-

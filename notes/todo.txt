@@ -1,6 +1,3 @@
 - Finish watching video [x]
-- Create a branch that only has comments and types []
-  - Set up a commit to check out in case you miss anything []
-- Remove warning message on youneedawiki.com [x]
-- Build app x1 []
-- Think of some tough questions and write out answers []
+- Strip out code and only do comments [x]
+- Attempt to do it, time it [x]
