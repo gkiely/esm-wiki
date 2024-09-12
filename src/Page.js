@@ -7,7 +7,7 @@ import { Folder, Pencil, Spinner } from './icons.js';
 import { getPrevNext } from './getPrevNext.js';
 import { parseContent } from './parseContent.js';
 
-// 4. Fetch content
+// Fetch content
 // https://developers.google.com/drive/api/reference/rest/v3/files/export
 const fetchContent = async ({ id = '' }) => {
   const response = await gapi.client.request({
@@ -51,8 +51,7 @@ const Page = ({ folderId = '', id = '' }) => {
    */
   const [file, setFile] = useState();
 
-  // 5.
-  // Edit button
+  // Request
   // Refresh on focus
   useEffect(() => {
     if (!id) return;
@@ -60,7 +59,7 @@ const Page = ({ folderId = '', id = '' }) => {
      * Focus event
      * @param {FocusEvent} [e]
      */
-    const onFocus = (e) => {
+    const getData = (e) => {
       // Is not a focus event
       if (!e) {
         setLoading(true);
@@ -89,11 +88,11 @@ const Page = ({ folderId = '', id = '' }) => {
         .catch(() => setError('Failed to fetch content'))
         .finally(() => setLoading(false));
     };
-    onFocus();
+    getData();
 
-    window.addEventListener('focus', onFocus);
+    window.addEventListener('focus', getData);
     return () => {
-      window.removeEventListener('focus', onFocus);
+      window.removeEventListener('focus', getData);
     };
   }, [id]);
 

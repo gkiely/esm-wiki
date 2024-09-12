@@ -1,4 +1,4 @@
 - Finish watching video [x]
 - Strip out code and only do comments [x]
 - Attempt to do it, time it [x]
-- Redo commits and put them in talk []
+- Clean up numbers []

@@ -1,5 +1,4 @@
 - How to make your own wiki interface
-- Lot to cover, going quickly code on github
 - Using preact, lightweight version of react. Doesn't require a build step.
 - Start by rendering google doc, then recursive tree component.
 - Starting with some html markup that initializes our api key.
