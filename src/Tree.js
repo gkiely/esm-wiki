@@ -6,6 +6,7 @@ import { Document, Folder } from './icons.js';
 import { getIcon } from './utils.js';
 
 // @TODO: Fetch files
+// https://developers.google.com/drive/api/reference/rest/v3/files/list
 
 /**
  *
@@ -26,7 +27,6 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
   //     .then((files) => files.filter((file) => file.name !== 'wiki.logo' && file.name !== 'wiki.page'))
   //     .then((files) => {
   //       setFiles(files);
-  //       // 9. Signals
   //       filesSignal.value = [...filesSignal.value, ...files];
   //     })
   //     .catch(console.error);
@@ -42,7 +42,10 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
             ${getIcon(file)}
             ${file.id === id ? html`<strong>${file.name}</strong>` : file.name}
           </${Link}>
-          ${file.mimeType === 'application/vnd.google-apps.folder' ? html`` : ''}
+          ${
+            '' // TODO: recursion
+          }
+          ${file.mimeType === 'application/vnd.google-apps.folder' ? html`` : null}
         </li>
       `;
       })}

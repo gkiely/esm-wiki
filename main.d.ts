@@ -203,8 +203,9 @@ type GapiResponse<T> = GapiPromise<{
 
 type Params = {
   fields?: string;
-  supportsAllDrives: true;
-  includeItemsFromAllDrives: true;
+  // Made optional for talk
+  supportsAllDrives?: true;
+  includeItemsFromAllDrives?: true;
 };
 
 type DriveAPI = {

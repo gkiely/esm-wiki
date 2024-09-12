@@ -10,7 +10,7 @@ const Main = () => {
   const [error, setError] = useState('');
   const params = useRoute('/:folderId/:id?')[1] || {
     folderId: '1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q',
-    id: '1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q',
+    id: '1VDTyWNVCspD2mMC-IQQUtgf8HyLUe37C6G87TheqJhI',
   };
 
   useEffect(() => {
