@@ -26,17 +26,20 @@ const fetchFile = async ({ id = '' }) => {
 };
 
 
-const response = await gapi.client.request({
-  path: 'https://www.googleapis.com/drive/v3/files',
-  params: {
-    q: `'${id}' in parents and trashed = false`,
-    fields: '*',
-    supportsAllDrives: true,
-    includeItemsFromAllDrives: true,
-  },
-});
+const fetchFiles = async (id = '') => {
+  const response = await gapi.client.request({
+    path: 'https://www.googleapis.com/drive/v3/files',
+    params: {
+      q: `'${id}' in parents and trashed = false`,
+      fields: '*',
+      supportsAllDrives: true,
+      includeItemsFromAllDrives: true,
+    },
+  });
 
-return response.result.files;
+  return response.result.files;
+}
+
 
 Recursion
 ---

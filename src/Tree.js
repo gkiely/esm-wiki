@@ -19,6 +19,7 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
    * @type {[DriveFile[] | undefined, (value: DriveFile[]) => void]}
    */
   const [files, setFiles] = useState();
+  const file = files?.find((o) => o.id);
 
   // useEffect(() => {
   //   fetchFiles(folderId)
@@ -41,11 +42,7 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
             ${getIcon(file)}
             ${file.id === id ? html`<strong>${file.name}</strong>` : file.name}
           </${Link}>
-          ${
-            '' /*
-            TODO: implement recursion
-            */
-          }
+          ${file.mimeType === 'application/vnd.google-apps.folder' ? html`` : ''}
         </li>
       `;
       })}

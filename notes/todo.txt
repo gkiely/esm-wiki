@@ -1,6 +1,4 @@
 - Finish watching video [x]
 - Strip out code and only do comments [x]
 - Attempt to do it, time it [x]
-- Clean up and make a branch with todos []
-- Practice doing todos x5
-- Make a separate folder that you can toggle in vscode
+- Clean up and make a branch with todos [x]
