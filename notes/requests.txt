@@ -37,3 +37,13 @@ const response = await gapi.client.request({
 });
 
 return response.result.files;
+
+Recursion
+---
+${
+  file.mimeType === 'application/vnd.google-apps.folder'
+    ? html`
+  <${Tree} id=${id} folderId=${file.id} rootFolderId=${rootFolderId}  />
+`
+    : null
+}

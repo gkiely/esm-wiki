@@ -3,35 +3,9 @@ import { useEffect, useState } from 'https://esm.sh/preact/hooks';
 import { Link } from 'https://esm.sh/wouter-preact';
 import { filesSignal } from './signals.js';
 import { Document, Folder } from './icons.js';
+import { getIcon } from './utils.js';
 
-// 7. Fetch files
-const fetchFiles = async (id = '') => {
-  const response = await gapi.client.request({
-    path: 'https://www.googleapis.com/drive/v3/files',
-    params: {
-      q: `'${id}' in parents and trashed = false`,
-      fields: '*',
-      supportsAllDrives: true,
-      includeItemsFromAllDrives: true,
-    },
-  });
-
-  return response.result.files;
-};
-
-const getIcon = (mimeType = '', iconLink = '') => {
-  if (mimeType === 'application/vnd.google-apps.folder') {
-    return html`<${Folder} />`;
-  }
-
-  if (mimeType === 'application/vnd.google-apps.document') {
-    return html`<${Document} />`;
-  }
-
-  return iconLink
-    ? html`<img src=${iconLink.replace('16', '32')} alt=${mimeType} style="width: 1rem; height: 1rem;" />`
-    : null;
-};
+// @TODO: Fetch files
 
 /**
  *
@@ -46,16 +20,16 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
    */
   const [files, setFiles] = useState();
 
-  useEffect(() => {
-    fetchFiles(folderId)
-      .then((files) => files.filter((file) => file.name !== 'wiki.logo' && file.name !== 'wiki.page'))
-      .then((files) => {
-        setFiles(files);
-        // 9. Signals
-        filesSignal.value = [...filesSignal.value, ...files];
-      })
-      .catch(console.error);
-  }, []);
+  // useEffect(() => {
+  //   fetchFiles(folderId)
+  //     .then((files) => files.filter((file) => file.name !== 'wiki.logo' && file.name !== 'wiki.page'))
+  //     .then((files) => {
+  //       setFiles(files);
+  //       // 9. Signals
+  //       filesSignal.value = [...filesSignal.value, ...files];
+  //     })
+  //     .catch(console.error);
+  // }, []);
 
   return html`
     <ul>
@@ -64,15 +38,13 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
         return html`
         <li>
           <${Link} href="/${rootFolderId}/${file.id}" key={file.id} style="display: flex; gap: .5rem; align-items: center;">
-            ${getIcon(file.mimeType, file.iconLink)}
+            ${getIcon(file)}
             ${file.id === id ? html`<strong>${file.name}</strong>` : file.name}
           </${Link}>
           ${
-            file.mimeType === 'application/vnd.google-apps.folder'
-              ? html`
-            <${Tree} id=${id} folderId=${file.id} rootFolderId=${rootFolderId}  />
-          `
-              : null
+            '' /*
+            TODO: implement recursion
+            */
           }
         </li>
       `;
@@ -96,7 +68,7 @@ export const StaticTree = ({ files, folderId = '' }) => {
         return html`
         <li>
           <${Link} href="/${folderId}/${file.id}" key={file.id} style="display: flex; gap: .5rem; align-items: center;">
-            ${getIcon(file.mimeType, file.iconLink)}
+            ${getIcon(file)}
             ${file.name}
           </${Link}>
         </li>
