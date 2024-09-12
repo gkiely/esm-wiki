@@ -8,7 +8,8 @@ import { getPrevNext } from './getPrevNext.js';
 import { parseContent } from './parseContent.js';
 
 // @TODO: Fetch content
-// @TODO: parse response
+// @TODO: parseContent on response body
+// @NOTE: remember the mimeType param
 // https://developers.google.com/drive/api/reference/rest/v3/files/export
 
 // @TODO: Fetch file
@@ -28,7 +29,19 @@ const Page = ({ folderId = '', id = '' }) => {
   const [file, setFile] = useState();
 
   // @TODO: make request with useEffect
-  useEffect(() => {}, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   Promise.allSettled([
+  //     fetchContent(id)
+  //       .then(setContent)
+  //       .catch(() => setContent('')),
+  //     fetchFile(id).then((file) => {
+  //       setFile(file);
+  //     }),
+  //   ])
+  //     .catch(() => setError('Failed to fetch content'))
+  //     .finally(() => setLoading(false));
+  // }, [id]);
 
   // @TODO: Folder view
   // const children =

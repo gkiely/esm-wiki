@@ -1,5 +1,6 @@
 - How to make your own wiki interface
 - Using preact, lightweight version of react. Doesn't require a build step.
+- Code will be available on github
 - Start by rendering google doc, then recursive tree component.
 - Starting with some html markup that initializes our api key.
 - I am not going into auth or setting up an api key today, but you can find that in the Google Drive API documentation.
@@ -26,20 +27,7 @@ Tree
   - Show a deeply nested example
   https://drive.google.com/drive/folders/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
   http://localhost:3000/1kpYo2FU9EmmK5U02fWXpbdBHETnfKx04
-- "View in drive" for folders
 
 
-Folder view
----
-- Single level tree, copy and paste existing logic
-
-Prev/Next
----
-- Copy the logic
-
-
-Keyboard shortcuts
----
-- Edit
-- Update on focus
-- Prev next
+- Show full example on: https://esm-wiki.pages.dev
+- Includes: folder view, prev/next, keyboard shortcuts

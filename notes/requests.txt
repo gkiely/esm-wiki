@@ -1,4 +1,4 @@
-const fetchContent = async ({ id = '' }) => {
+const fetchContent = async ( id = '' ) => {
   const response = await gapi.client.request({
     path: `https://www.googleapis.com/drive/v3/files/${id}/export`,
     params: {
@@ -12,7 +12,7 @@ const fetchContent = async ({ id = '' }) => {
 };
 
 
-const fetchFile = async ({ id = '' }) => {
+const fetchFile = async ( id = '' ) => {
   const response = await gapi.client.request({
     path: `https://www.googleapis.com/drive/v3/files/${id}`,
     params: {

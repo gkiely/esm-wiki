@@ -22,6 +22,7 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
   const [files, setFiles] = useState();
   const file = files?.find((o) => o.id);
 
+  // TODO: make request
   // useEffect(() => {
   //   fetchFiles(folderId)
   //     .then((files) => files.filter((file) => file.name !== 'wiki.logo' && file.name !== 'wiki.page'))
@@ -44,8 +45,8 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
           </${Link}>
           ${
             '' // TODO: recursion
+            // ${file.mimeType === 'application/vnd.google-apps.folder' ? html`<${Tree} id=${id} folderId=${file.id} rootFolderId=${rootFolderId}  />` : null}
           }
-          ${file.mimeType === 'application/vnd.google-apps.folder' ? html`` : null}
         </li>
       `;
       })}
