@@ -1,11 +1,9 @@
 import { html } from 'https://esm.sh/htm/preact';
-import { useEffect, useState } from 'https://esm.sh/preact/hooks';
 import { Link } from 'https://esm.sh/wouter-preact';
 import { filesSignal } from './signals.js';
 import { Document, Folder } from './icons.js';
 import { useQuery } from 'https://esm.sh/preact-fetching';
 
-// 7. Fetch files
 const fetchFiles = async (id = '') => {
   const response = await gapi.client.request({
     path: 'https://www.googleapis.com/drive/v3/files',
@@ -35,7 +33,6 @@ const getIcon = (mimeType = '', iconLink = '') => {
 };
 
 /**
- *
  * @param {object} props
  * @param {string} props.id
  * @param {string} props.folderId
@@ -72,9 +69,7 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
   `;
 };
 
-// 9.1 Tree
 /**
- *
  * @param {object} props
  * @param {DriveFile[]} props.files
  * @param {string} props.folderId

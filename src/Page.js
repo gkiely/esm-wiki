@@ -41,15 +41,18 @@ const fetchFile = async ({ id = '' }) => {
 const Page = ({ folderId = '', id = '' }) => {
   const files = filesSignal.value;
   const {
-    data: file = files.find((o) => o.id === id),
+    data,
     isLoading: isLoadingFile,
     refetch: refetchFile,
   } = useQuery(`/drive/v3/files/${id}`, () => fetchFile({ id }));
+
+  const file = data?.id === id ? data : files.find((o) => o.id === id);
+
   const {
     data: content,
     isLoading: isLoadingContent,
     refetch: refetchContent,
-  } = useQuery(`/drive/v3/files/${id}/export`, () => {
+  } = useQuery(file ? `/drive/v3/files/${id}/export` : null, () => {
     if (file?.mimeType === 'application/vnd.google-apps.folder') return;
     return fetchContent({ id });
   });
@@ -66,7 +69,6 @@ const Page = ({ folderId = '', id = '' }) => {
     return () => window.removeEventListener('focus', cb);
   }, [id]);
 
-  // 9.2 Static tree
   const children =
     file && file.mimeType === 'application/vnd.google-apps.folder'
       ? files.filter((o) => o.parents?.[0] === file.id)
@@ -84,11 +86,9 @@ const Page = ({ folderId = '', id = '' }) => {
         window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank');
       }
       if (event.key === 'ArrowLeft' && prev) {
-        console.log('prev', prev.id);
         setLocation(`/${folderId}/${prev.id}`);
       }
       if (event.key === 'ArrowRight' && next) {
-        console.log('next', next.id);
         setLocation(`/${folderId}/${next.id}`);
       }
     };
@@ -96,7 +96,6 @@ const Page = ({ folderId = '', id = '' }) => {
     return () => window.removeEventListener('keydown', cb);
   }, [id, prev?.id, next?.id]);
 
-  // 1. Static content
   return html`
     <div class="Page">
       ${file?.mimeType === 'application/vnd.google-apps.folder' && html`<a target="_blank" class="button" href="https://drive.google.com/drive/folders/${file.id}"><${Folder} /> View in Drive</a>`}
