@@ -1,2 +1,3 @@
-- Default cache working
+- Move to npm modules
 - Move to preact with JSX
+- Default cache working
