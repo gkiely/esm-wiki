@@ -1,4 +1,2 @@
-- Finish watching video [x]
-- Strip out code and only do comments [x]
-- Attempt to do it, time it [x]
-- Clean up numbers []
+- Default cache working
+- Move to preact with JSX
