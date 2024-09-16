@@ -28,6 +28,7 @@
     "htm": "^3.1.1",
     "preact": "^10.23.2",
     "preact-custom-element": "^4.3.0",
+    "preact-fetching": "^1.0.0",
     "wouter-preact": "^3.3.5"
   }
 }

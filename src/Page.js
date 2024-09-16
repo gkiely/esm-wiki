@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'https://esm.sh/preact/hooks';
+import { useEffect, useCallback } from 'https://esm.sh/preact/hooks';
 import { html } from 'https://esm.sh/htm/preact';
 import { filesSignal } from './signals.js';
 import { StaticTree } from './Tree.js';
@@ -6,6 +6,8 @@ import { Link, useLocation } from 'https://esm.sh/wouter-preact';
 import { Folder, Pencil, Spinner } from './icons.js';
 import { getPrevNext } from './getPrevNext.js';
 import { parseContent } from './parseContent.js';
+import { useQuery } from 'https://esm.sh/preact-fetching';
+import { useKeyDown } from './hooks.js';
 
 // Fetch content
 // https://developers.google.com/drive/api/reference/rest/v3/files/export
@@ -38,62 +40,31 @@ const fetchFile = async ({ id = '' }) => {
 };
 
 const Page = ({ folderId = '', id = '' }) => {
-  // 4.1 Fetch content
-  const [content, setContent] = useState('');
-  const [, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-
   const files = filesSignal.value;
+  const {
+    data: file = files.find((o) => o.id === id),
+    isLoading: isLoadingFile,
+    refetch: refetchFile,
+  } = useQuery(`/drive/v3/files/${id}`, () => fetchFile({ id }));
+  const {
+    data: content,
+    isLoading: isLoadingContent,
+    refetch: refetchContent,
+  } = useQuery(`/drive/v3/files/${id}/export`, () => {
+    if (file?.mimeType === 'application/vnd.google-apps.folder') return;
+    return fetchContent({ id });
+  });
 
-  /**
-   * Fetch file
-   * @type {[DriveFile | undefined, (value: DriveFile) => void]}
-   */
-  const [file, setFile] = useState();
+  const loading = isLoadingFile || isLoadingContent;
 
-  // Request
-  // Refresh on focus
   useEffect(() => {
-    if (!id) return;
-    /**
-     * Focus event
-     * @param {FocusEvent} [e]
-     */
-    const getData = (e) => {
-      // Is not a focus event
-      if (!e) {
-        setLoading(true);
-        const file = files.find((o) => o.id === id);
-        if (file) {
-          setFile(file);
-          file.mimeType === 'application/vnd.google-apps.folder'
-            ? Promise.resolve('')
-                .then(setContent)
-                .finally(() => setLoading(false))
-            : fetchContent({ id })
-                .then(setContent)
-                .catch(() => setContent(''))
-                .finally(() => setLoading(false));
-          return;
-        }
-      }
-      Promise.allSettled([
-        fetchContent({ id })
-          .then(setContent)
-          .catch(() => setContent('')),
-        fetchFile({ id }).then((file) => {
-          setFile(file);
-        }),
-      ])
-        .catch(() => setError('Failed to fetch content'))
-        .finally(() => setLoading(false));
+    const cb = () => {
+      refetchFile();
+      refetchContent();
     };
-    getData();
 
-    window.addEventListener('focus', getData);
-    return () => {
-      window.removeEventListener('focus', getData);
-    };
+    window.addEventListener('focus', cb);
+    return () => window.removeEventListener('focus', cb);
   }, [id]);
 
   // 9.2 Static tree
@@ -102,37 +73,25 @@ const Page = ({ folderId = '', id = '' }) => {
       ? files.filter((o) => o.parents?.[0] === file.id)
       : [];
 
-  // 10. Prev/Next
   const { prev, next } = getPrevNext({ file, files, id });
-
-  // 11. Prev/Next keyboard navigation
   const setLocation = useLocation()[1];
 
-  // 6. Pressing e will open the edit link
-  /**
-   * @type {(event: KeyboardEvent) => void}
-   */
-  const onKeyDown = useCallback(
-    (event) => {
-      if (event.key === 'e') {
-        window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank');
-      }
-      if (event.key === 'ArrowLeft' && prev) {
-        setLocation(`/${folderId}/${prev.id}`);
-      }
-      if (event.key === 'ArrowRight' && next) {
-        setLocation(`/${folderId}/${next.id}`);
-      }
-    },
-    [prev?.id, next?.id, id]
+  useKeyDown(
+    useCallback(
+      (event) => {
+        if (event.key === 'e') {
+          window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank');
+        }
+        if (event.key === 'ArrowLeft' && prev) {
+          setLocation(`/${folderId}/${prev.id}`);
+        }
+        if (event.key === 'ArrowRight' && next) {
+          setLocation(`/${folderId}/${next.id}`);
+        }
+      },
+      [id, prev?.id, next?.id]
+    )
   );
-
-  useEffect(() => {
-    window.addEventListener('keydown', onKeyDown);
-    return () => {
-      window.removeEventListener('keydown', onKeyDown);
-    };
-  }, [onKeyDown]);
 
   // 1. Static content
   return html`

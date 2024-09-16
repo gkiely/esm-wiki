@@ -20,6 +20,10 @@ declare module 'https://esm.sh/preact' {
   export * from 'preact';
 }
 
+declare module 'https://esm.sh/preact-fetching' {
+  export * from 'preact-fetching';
+}
+
 type Token = {
   access_token: string;
   expires_in: number;
