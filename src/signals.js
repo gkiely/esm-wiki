@@ -1,4 +1,4 @@
-import { signal, Signal } from 'https://esm.sh/@preact/signals';
+import { signal, Signal } from '@preact/signals';
 
 /**
  * @type {Signal<DriveFile[]>}

@@ -1,29 +1,3 @@
-declare module 'https://esm.sh/preact-custom-element' {
-  export { default } from '@types/preact-custom-element';
-}
-declare module 'https://esm.sh/preact/hooks' {
-  export * from 'preact/hooks';
-}
-declare module 'https://esm.sh/htm/preact' {
-  export * from 'htm/preact';
-}
-
-declare module 'https://esm.sh/wouter-preact' {
-  export * from 'wouter-preact';
-}
-
-declare module 'https://esm.sh/@preact/signals' {
-  export * from '@preact/signals';
-}
-
-declare module 'https://esm.sh/preact' {
-  export * from 'preact';
-}
-
-declare module 'https://esm.sh/preact-fetching' {
-  export * from 'preact-fetching';
-}
-
 type Token = {
   access_token: string;
   expires_in: number;

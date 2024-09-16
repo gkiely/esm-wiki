@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "incremental": true,
     "checkJs": true,
     "allowJs": true,
@@ -8,15 +11,27 @@
     "skipLibCheck": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "esModuleInterop": false,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+
+    // Enforces .js extension for ES modules
+    // "module": "NodeNext",
+    // "moduleResolution": "NodeNext",
 
     // Language settings
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "useUnknownInCatchVariables": true,
     "allowUnreachableCode": false,
+
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "paths": {
+			"react": ["./node_modules/preact/compat/"],
+			"react-dom": ["./node_modules/preact/compat/"]
+		},
+
+    // Add typeRoots to include global types
+    // "typeRoots": ["./types", "./node_modules/@types"]
   },
-  "include": ["src/**/*.js", "main.d.ts"],
+  "include": ["types.d.ts", "src/**/*.js", "src/main.jsx", "src/Tree.jsx", "src/Page.jsx"],
   "exclude": ["node_modules"],
 }

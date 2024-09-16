@@ -1,8 +1,8 @@
-import { html } from 'https://esm.sh/htm/preact';
-import { Link } from 'https://esm.sh/wouter-preact';
+import { html } from 'htm/preact';
+import { Link } from 'wouter-preact';
 import { filesSignal } from './signals.js';
 import { Document, Folder } from './icons.js';
-import { useQuery } from 'https://esm.sh/preact-fetching';
+import { useQuery } from 'preact-fetching';
 
 const fetchFiles = async (id = '') => {
   const response = await gapi.client.request({
@@ -36,7 +36,7 @@ const getIcon = (mimeType = '', iconLink = '') => {
  * @param {object} props
  * @param {string} props.id
  * @param {string} props.folderId
- * @param {string} props.rootFolderId
+ * @param {string} [props.rootFolderId]
  */
 const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
   const { data: files } = useQuery(`/drive/v3/files?q='${folderId}' in parents`, async () => {
@@ -45,28 +45,35 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
     return files;
   });
 
-  return html`
+  return (
     <ul>
-      ${rootFolderId === folderId ? html`<li><${Link} href="/${folderId}/${folderId}" style="display: flex; gap: .5rem; align-items: center;">🏠 Home</${Link}></li>` : null}
-      ${files?.map((file) => {
-        return html`
+      {rootFolderId === folderId ? (
         <li>
-          <${Link} aria-current="page" href="/${rootFolderId}/${file.id}" key={file.id} style="display: flex; gap: .5rem; align-items: center;">
-            ${getIcon(file.mimeType, file.iconLink)}
-            ${file.id === id ? html`<strong>${file.name}</strong>` : file.name}
-          </${Link}>
-          ${
-            file.mimeType === 'application/vnd.google-apps.folder'
-              ? html`
-            <${Tree} id=${id} folderId=${file.id} rootFolderId=${rootFolderId}  />
-          `
-              : null
-          }
+          <Link href="/${folderId}/${folderId}" style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
+            🏠 Home
+          </Link>
         </li>
-      `;
+      ) : null}
+      {files?.map((file) => {
+        return (
+          <li key={file.id}>
+            <Link
+              aria-current="page"
+              href="/${rootFolderId}/${file.id}"
+              key={file.id}
+              style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}
+            >
+              {getIcon(file.mimeType, file.iconLink)}
+              {file.id === id ? html`<strong>${file.name}</strong>` : file.name}
+            </Link>
+            {file.mimeType === 'application/vnd.google-apps.folder' ? (
+              <Tree id={id} folderId={file.id} rootFolderId={rootFolderId} />
+            ) : null}
+          </li>
+        );
       })}
-    </ul>    
-  `;
+    </ul>
+  );
 };
 
 /**
@@ -76,20 +83,24 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
  * @returns
  */
 export const StaticTree = ({ files, folderId = '' }) => {
-  return html`
+  return (
     <ul>
-      ${files?.map((file) => {
-        return html`
-        <li>
-          <${Link} href="/${folderId}/${file.id}" key={file.id} style="display: flex; gap: .5rem; align-items: center;">
-            ${getIcon(file.mimeType, file.iconLink)}
-            ${file.name}
-          </${Link}>
-        </li>
-      `;
+      {files?.map((file) => {
+        return (
+          <li key={file.id}>
+            <Link
+              href="/${folderId}/${file.id}"
+              key={file.id}
+              style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}
+            >
+              {getIcon(file.mimeType, file.iconLink)}
+              {file.name}
+            </Link>
+          </li>
+        );
       })}
     </ul>
-  `;
+  );
 };
 
 export default Tree;

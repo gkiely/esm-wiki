@@ -1,3 +1,4 @@
-- Move to npm modules
 - Move to preact with JSX
+- Update modules/import map
+
 - Default cache working

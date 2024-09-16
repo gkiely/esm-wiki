@@ -1,9 +1,9 @@
-import { render } from 'https://esm.sh/preact';
-import { useState, useEffect } from 'https://esm.sh/preact/hooks';
-import { html } from 'https://esm.sh/htm/preact';
-import { useRoute } from 'https://esm.sh/wouter-preact';
-import Page from './Page.js';
-import Tree from './Tree.js';
+import { render } from 'preact';
+import { useState, useEffect } from 'preact/hooks';
+import { html } from 'htm/preact';
+import { useRoute } from 'wouter-preact';
+import Page from './Page';
+import Tree from './Tree';
 
 const Main = () => {
   const [loading, setLoading] = useState(true);
@@ -21,12 +21,12 @@ const Main = () => {
   if (loading) return html`<div>Loading...</div>`;
   if (error) return html`<div>Error: ${error}</div>`;
 
-  return html`
-    <div class="wrapper">
-      <${Tree} folderId=${params?.folderId} id=${params?.id} />
-      <${Page} folderId=${params?.folderId} id=${params?.id} />
+  return (
+    <div className="wrapper">
+      {params.id && params.folderId && <Tree folderId={params?.folderId} id={params?.id} />}
+      <Page folderId={params?.folderId} id={params?.id} />
     </div>
-  `;
+  );
 };
 
 render(html`<${Main} />`, document.body);

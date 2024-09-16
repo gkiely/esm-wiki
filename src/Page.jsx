@@ -1,16 +1,19 @@
-import { useEffect } from 'https://esm.sh/preact/hooks';
-import { html } from 'https://esm.sh/htm/preact';
+import { useEffect } from 'preact/hooks';
 import { filesSignal } from './signals.js';
-import { StaticTree } from './Tree.js';
-import { Link, useLocation } from 'https://esm.sh/wouter-preact';
-import { Folder, Pencil, Spinner } from './icons.js';
-import { getPrevNext } from './getPrevNext.js';
-import { parseContent } from './parseContent.js';
-import { useQuery } from 'https://esm.sh/preact-fetching';
+import { StaticTree } from './Tree.jsx';
+import { Link, useLocation } from 'wouter-preact';
+import { Folder, Pencil, Spinner } from './icons';
+import { getPrevNext } from './getPrevNext';
+import { parseContent } from './parseContent';
+import { useQuery } from 'preact-fetching';
 
-// Fetch content
-// https://developers.google.com/drive/api/reference/rest/v3/files/export
-const fetchContent = async ({ id = '' }) => {
+/**
+ * Fetch content
+ * https://developers.google.com/drive/api/reference/rest/v3/files/export
+ * @param {object} options
+ * @param {string} options.id
+ */
+const fetchContent = async ({ id }) => {
   const response = await gapi.client.request({
     path: `https://www.googleapis.com/drive/v3/files/${id}/export`,
     params: {
@@ -23,8 +26,12 @@ const fetchContent = async ({ id = '' }) => {
   return parseContent(response.body);
 };
 
-// Fetch file
-// https://developers.google.com/drive/api/reference/rest/v3/files/get
+/**
+ * Fetch file
+ * https://developers.google.com/drive/api/reference/rest/v3/files/get
+ * @param {object} options
+ * @param {string} options.id
+ */
 const fetchFile = async ({ id = '' }) => {
   const response = await gapi.client.request({
     path: `https://www.googleapis.com/drive/v3/files/${id}`,
@@ -96,23 +103,31 @@ const Page = ({ folderId = '', id = '' }) => {
     return () => window.removeEventListener('keydown', cb);
   }, [id, prev?.id, next?.id]);
 
-  return html`
+  return (
     <div class="Page">
-      ${file?.mimeType === 'application/vnd.google-apps.folder' && html`<a target="_blank" class="button" href="https://drive.google.com/drive/folders/${file.id}"><${Folder} /> View in Drive</a>`}
-      ${file?.mimeType === 'application/vnd.google-apps.document' && html`<a target="_blank" class="button" href="https://docs.google.com/document/d/${file.id}/edit"><${Pencil} /> Edit</a>`}
-      <h1>${file?.name}</h1>
-      <p class="content">
-        ${loading ? html`<${Spinner} />` : ''}
-        ${content ? html`<div dangerouslySetInnerHTML=${{ __html: content }}></div>` : ''}
-      </p>
-      ${file?.mimeType === 'application/vnd.google-apps.folder' && html`<${StaticTree} folderId=${folderId} files=${children} />`}      
+      {file?.mimeType === 'application/vnd.google-apps.folder' && (
+        <a target="_blank" class="button" href="https://drive.google.com/drive/folders/${file.id}">
+          <Folder /> View in Drive
+        </a>
+      )}
+      {file?.mimeType === 'application/vnd.google-apps.document' && (
+        <a target="_blank" class="button" href="https://docs.google.com/document/d/${file.id}/edit">
+          <Pencil /> Edit
+        </a>
+      )}
+      <h1>{file?.name}</h1>
+      <div class="content">
+        {loading ? <Spinner /> : ''}
+        {content ? <div dangerouslySetInnerHTML={{ __html: content }} /> : ''}
+      </div>
+      {file?.mimeType === 'application/vnd.google-apps.folder' && <StaticTree folderId={folderId} files={children} />}
       <div class="nav">
-        ${prev && html`<${Link} href="/${folderId}/${prev.id}">← ${prev.name}</${Link}>`}
-        ${prev && next && html`<span style="color: #646cff"> | </span>`}
-        ${next && html`<${Link} href="/${folderId}/${next.id}">${next.name} →</${Link}>`}
+        {prev && <Link href={`/${folderId}/${prev.id}`}>← {prev.name}</Link>}
+        {prev && next && <span style="color: #646cff"> | </span>}
+        {next && <Link href={`/${folderId}/${next.id}`}>{next.name} →</Link>}
       </div>
     </div>
-  `;
+  );
 };
 
 export default Page;
