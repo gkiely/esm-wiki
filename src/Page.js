@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'https://esm.sh/preact/hooks';
+import { useEffect } from 'https://esm.sh/preact/hooks';
 import { html } from 'https://esm.sh/htm/preact';
 import { filesSignal } from './signals.js';
 import { StaticTree } from './Tree.js';
@@ -7,7 +7,6 @@ import { Folder, Pencil, Spinner } from './icons.js';
 import { getPrevNext } from './getPrevNext.js';
 import { parseContent } from './parseContent.js';
 import { useQuery } from 'https://esm.sh/preact-fetching';
-import { useKeyDown } from './hooks.js';
 
 // Fetch content
 // https://developers.google.com/drive/api/reference/rest/v3/files/export
@@ -76,22 +75,26 @@ const Page = ({ folderId = '', id = '' }) => {
   const { prev, next } = getPrevNext({ file, files, id });
   const setLocation = useLocation()[1];
 
-  useKeyDown(
-    useCallback(
-      (event) => {
-        if (event.key === 'e') {
-          window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank');
-        }
-        if (event.key === 'ArrowLeft' && prev) {
-          setLocation(`/${folderId}/${prev.id}`);
-        }
-        if (event.key === 'ArrowRight' && next) {
-          setLocation(`/${folderId}/${next.id}`);
-        }
-      },
-      [id, prev?.id, next?.id]
-    )
-  );
+  useEffect(() => {
+    /**
+     * @param {KeyboardEvent} event
+     */
+    const cb = (event) => {
+      if (event.key === 'e') {
+        window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank');
+      }
+      if (event.key === 'ArrowLeft' && prev) {
+        console.log('prev', prev.id);
+        setLocation(`/${folderId}/${prev.id}`);
+      }
+      if (event.key === 'ArrowRight' && next) {
+        console.log('next', next.id);
+        setLocation(`/${folderId}/${next.id}`);
+      }
+    };
+    window.addEventListener('keydown', cb);
+    return () => window.removeEventListener('keydown', cb);
+  }, [id, prev?.id, next?.id]);
 
   // 1. Static content
   return html`
