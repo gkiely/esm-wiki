@@ -1,6 +1,6 @@
-import { signal, Signal } from '@preact/signals';
+import { signal } from '@preact/signals';
 
 /**
- * @type {Signal<DriveFile[]>}
+ * @type {import('@preact/signals').Signal<DriveFile[]>}
  */
 export const filesSignal = signal([]);
