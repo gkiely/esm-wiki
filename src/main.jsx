@@ -1,10 +1,10 @@
 import { render } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
 import { useRoute } from 'wouter-preact';
-import { CacheContext } from 'preact-fetching';
+// import { CacheContext } from 'preact-fetching';
 import Page from './Page';
 import Tree from './Tree';
-import { DEV, host, protocol } from './constants';
+// import { DEV, host, protocol } from './constants';
 
 // const cacheKey = 'wiki';
 // const isHttpDev = DEV && protocol === 'http:' && host !== 'localhost';
@@ -22,7 +22,7 @@ import { DEV, host, protocol } from './constants';
 
 // console.log('map', map);
 
-const map = new Map();
+// const map = new Map();
 
 const Main = () => {
   const [loading, setLoading] = useState(true);
@@ -40,15 +40,15 @@ const Main = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  console.log('map', map);
+  // console.log('map', map);
 
   return (
-    <CacheContext.Provider value={map}>
-      <div className="wrapper">
-        {params.id && params.folderId && <Tree folderId={params?.folderId} id={params?.id} />}
-        <Page folderId={params?.folderId} id={params?.id} />
-      </div>
-    </CacheContext.Provider>
+    // <CacheContext.Provider value={map}>
+    <div className="wrapper">
+      {params.id && params.folderId && <Tree folderId={params?.folderId} id={params?.id} />}
+      <Page folderId={params?.folderId} id={params?.id} />
+    </div>
+    // </CacheContext.Provider>
   );
 };
 

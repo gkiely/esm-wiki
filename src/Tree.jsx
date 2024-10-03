@@ -1,5 +1,4 @@
 import { Link } from 'wouter-preact';
-import { filesSignal } from './signals.js';
 import { Document, Folder } from './icons.js';
 import { useQuery } from 'preact-fetching';
 
@@ -15,6 +14,11 @@ const fetchFiles = async (id = '') => {
   });
 
   return response.result.files;
+};
+
+export const filesQuery = async (id = '') => {
+  const files = await fetchFiles(id);
+  return files.filter((file) => file.name !== 'wiki.logo' && file.name !== 'wiki.page');
 };
 
 const getIcon = (mimeType = '', iconLink = '') => {
@@ -36,11 +40,7 @@ const getIcon = (mimeType = '', iconLink = '') => {
  * @param {string} [props.rootFolderId]
  */
 const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
-  const { data: files } = useQuery(`/drive/v3/files?q='${folderId}' in parents`, async () => {
-    const files = (await fetchFiles(folderId)).filter((file) => file.name !== 'wiki.logo' && file.name !== 'wiki.page');
-    filesSignal.value = [...filesSignal.value, ...files];
-    return files;
-  });
+  const { data: files } = useQuery(`/drive/v3/files?q='${folderId}' in parents`, () => filesQuery(folderId));
 
   return (
     <ul>

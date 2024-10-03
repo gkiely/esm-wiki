@@ -1,3 +1,4 @@
+- test moving to react
 - Default cache working
 - set up tailwind
 - tests with bun

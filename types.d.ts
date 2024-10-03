@@ -235,3 +235,5 @@ declare const gapi_loaded: {
   resolve: () => void;
   reject: (error: Error) => void;
 };
+
+type Result<T> = import('preact-fetching').Result<T>;

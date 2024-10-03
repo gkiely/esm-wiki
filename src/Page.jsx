@@ -1,6 +1,5 @@
 import { useEffect } from 'preact/hooks';
-import { filesSignal } from './signals.js';
-import { StaticTree } from './Tree.jsx';
+import { filesQuery, StaticTree } from './Tree.jsx';
 import { Link, useLocation } from 'wouter-preact';
 import { Folder, Pencil, Spinner } from './icons';
 import { getPrevNext } from './getPrevNext';
@@ -46,14 +45,15 @@ const fetchFile = async ({ id = '' }) => {
 };
 
 const Page = ({ folderId = '', id = '' }) => {
-  const files = filesSignal.value;
   const {
     data,
     isLoading: isLoadingFile,
     refetch: refetchFile,
   } = useQuery(`/drive/v3/files/${id}`, () => fetchFile({ id }));
 
-  const file = data?.id === id ? data : files.find((o) => o.id === id);
+  /** @type Result<DriveFile[]> */
+  const { data: files = [] } = useQuery(`/drive/v3/files?q='${id}' in parents`, () => filesQuery(id));
+  const file = data?.id === id ? data : files?.find((o) => o.id === id);
 
   const {
     data: content,
