@@ -1,5 +1,7 @@
 Dev
 - Biome [x]
+- Move to preact with JSX [x]
+- Update modules/import map [x]
 
 Components
 - Page [x]

@@ -1,4 +1,3 @@
-import { html } from 'htm/preact';
 import { Link } from 'wouter-preact';
 import { filesSignal } from './signals.js';
 import { Document, Folder } from './icons.js';
@@ -20,16 +19,14 @@ const fetchFiles = async (id = '') => {
 
 const getIcon = (mimeType = '', iconLink = '') => {
   if (mimeType === 'application/vnd.google-apps.folder') {
-    return html`<${Folder} />`;
+    return <Folder />;
   }
 
   if (mimeType === 'application/vnd.google-apps.document') {
-    return html`<${Document} />`;
+    return <Document />;
   }
 
-  return iconLink
-    ? html`<img src=${iconLink.replace('16', '32')} alt=${mimeType} style="width: 1rem; height: 1rem;" />`
-    : null;
+  return iconLink ? <img src={iconLink.replace('16', '32')} alt={mimeType} style="width: 1rem; height: 1rem;" /> : null;
 };
 
 /**
@@ -49,7 +46,7 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
     <ul>
       {rootFolderId === folderId ? (
         <li>
-          <Link href="/${folderId}/${folderId}" style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
+          <Link href={`/${folderId}/${folderId}`} style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
             🏠 Home
           </Link>
         </li>
@@ -59,12 +56,11 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
           <li key={file.id}>
             <Link
               aria-current="page"
-              href="/${rootFolderId}/${file.id}"
-              key={file.id}
+              href={`/${rootFolderId}/${file.id}`}
               style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}
             >
               {getIcon(file.mimeType, file.iconLink)}
-              {file.id === id ? html`<strong>${file.name}</strong>` : file.name}
+              {file.id === id ? <strong>{file.name}</strong> : file.name}
             </Link>
             {file.mimeType === 'application/vnd.google-apps.folder' ? (
               <Tree id={id} folderId={file.id} rootFolderId={rootFolderId} />
@@ -82,17 +78,13 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
  * @param {string} props.folderId
  * @returns
  */
-export const StaticTree = ({ files, folderId = '' }) => {
+export const StaticTree = ({ files, folderId }) => {
   return (
     <ul>
       {files?.map((file) => {
         return (
           <li key={file.id}>
-            <Link
-              href="/${folderId}/${file.id}"
-              key={file.id}
-              style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}
-            >
+            <Link href={`/${folderId}/${file.id}`} style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
               {getIcon(file.mimeType, file.iconLink)}
               {file.name}
             </Link>

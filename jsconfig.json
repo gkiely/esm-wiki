@@ -32,6 +32,6 @@
     // Add typeRoots to include global types
     // "typeRoots": ["./types", "./node_modules/@types"]
   },
-  "include": ["types.d.ts", "src/**/*.js", "src/main.jsx", "src/Tree.jsx", "src/Page.jsx"],
+  "include": ["types.d.ts", "src/**/*.js", "src/**/*.jsx"],
   "exclude": ["node_modules"],
 }

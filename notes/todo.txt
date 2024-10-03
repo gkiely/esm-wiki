@@ -1,4 +1,3 @@
-- Move to preact with JSX
-- Update modules/import map
-
 - Default cache working
+- set up tailwind
+- tests with bun
