@@ -3,7 +3,7 @@ import { useState, useEffect } from 'preact/hooks';
 import { useRoute } from 'wouter-preact';
 // import { CacheContext } from 'preact-fetching';
 import Page from './Page';
-import Tree from './Tree';
+import Tree, { HiddenTree } from './Tree';
 // import { DEV, host, protocol } from './constants';
 
 // const cacheKey = 'wiki';
@@ -45,7 +45,10 @@ const Main = () => {
   return (
     // <CacheContext.Provider value={map}>
     <div className="wrapper">
-      {params.id && params.folderId && <Tree folderId={params?.folderId} id={params?.id} />}
+      {params.id && <Tree folderId={params?.folderId} id={params?.id} />}
+
+      {/* Alternative to loading files without Tree */}
+      {/* {params.id && <HiddenTree folderId={params?.folderId} id={params?.id} />} */}
       <Page folderId={params?.folderId} id={params?.id} />
     </div>
     // </CacheContext.Provider>

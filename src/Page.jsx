@@ -1,5 +1,6 @@
 import { useEffect } from 'preact/hooks';
-import { filesQuery, StaticTree } from './Tree.jsx';
+import { filesSignal } from './signals.js';
+import { StaticTree } from './Tree.jsx';
 import { Link, useLocation } from 'wouter-preact';
 import { Folder, Pencil, Spinner } from './icons';
 import { getPrevNext } from './getPrevNext';
@@ -45,15 +46,14 @@ const fetchFile = async ({ id = '' }) => {
 };
 
 const Page = ({ folderId = '', id = '' }) => {
+  const files = filesSignal.value;
   const {
     data,
     isLoading: isLoadingFile,
     refetch: refetchFile,
   } = useQuery(`/drive/v3/files/${id}`, () => fetchFile({ id }));
 
-  /** @type Result<DriveFile[]> */
-  const { data: files = [] } = useQuery(`/drive/v3/files?q='${id}' in parents`, () => filesQuery(id));
-  const file = data?.id === id ? data : files?.find((o) => o.id === id);
+  const file = data?.id === id ? data : files.find((o) => o.id === id);
 
   const {
     data: content,
@@ -90,7 +90,9 @@ const Page = ({ folderId = '', id = '' }) => {
      */
     const cb = (event) => {
       if (event.key === 'e') {
-        window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank');
+        if (file?.mimeType === 'application/vnd.google-apps.folder')
+          return window.open(`https://drive.google.com/drive/folders/${id}`, '_blank');
+        return window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank');
       }
       if (event.key === 'ArrowLeft' && prev) {
         setLocation(`/${folderId}/${prev.id}`);
@@ -106,12 +108,12 @@ const Page = ({ folderId = '', id = '' }) => {
   return (
     <div class="Page">
       {file?.mimeType === 'application/vnd.google-apps.folder' && (
-        <a target="_blank" class="button" href="https://drive.google.com/drive/folders/${file.id}">
+        <a target="_blank" class="button" href={`https://drive.google.com/drive/folders/${file.id}`}>
           <Folder /> View in Drive
         </a>
       )}
       {file?.mimeType === 'application/vnd.google-apps.document' && (
-        <a target="_blank" class="button" href="https://docs.google.com/document/d/${file.id}/edit">
+        <a target="_blank" class="button" href={`https://docs.google.com/document/d/${file.id}/edit`}>
           <Pencil /> Edit
         </a>
       )}

@@ -236,4 +236,6 @@ declare const gapi_loaded: {
   reject: (error: Error) => void;
 };
 
+type PropsOf<T> = T extends import('preact').FunctionComponent<infer P> ? P : never;
+
 type Result<T> = import('preact-fetching').Result<T>;

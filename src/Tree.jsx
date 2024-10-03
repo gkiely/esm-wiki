@@ -1,6 +1,8 @@
 import { Link } from 'wouter-preact';
-import { Document, Folder } from './icons.js';
+import { filesSignal } from './signals';
+import { Document, Folder } from './icons';
 import { useQuery } from 'preact-fetching';
+import { Fragment } from 'preact/jsx-runtime';
 
 const fetchFiles = async (id = '') => {
   const response = await gapi.client.request({
@@ -16,9 +18,13 @@ const fetchFiles = async (id = '') => {
   return response.result.files;
 };
 
-export const filesQuery = async (id = '') => {
-  const files = await fetchFiles(id);
-  return files.filter((file) => file.name !== 'wiki.logo' && file.name !== 'wiki.page');
+/**
+ * @param {string} id
+ */
+const filesQuery = async (id) => {
+  const files = (await fetchFiles(id)).filter((file) => file.name !== 'wiki.logo' && file.name !== 'wiki.page');
+  filesSignal.value = [...filesSignal.value, ...files];
+  return files;
 };
 
 const getIcon = (mimeType = '', iconLink = '') => {
@@ -39,7 +45,7 @@ const getIcon = (mimeType = '', iconLink = '') => {
  * @param {string} props.folderId
  * @param {string} [props.rootFolderId]
  */
-const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
+const Tree = ({ id, folderId, rootFolderId = folderId }) => {
   const { data: files } = useQuery(`/drive/v3/files?q='${folderId}' in parents`, () => filesQuery(folderId));
 
   return (
@@ -76,7 +82,6 @@ const Tree = ({ id = '', folderId = '', rootFolderId = folderId }) => {
  * @param {object} props
  * @param {DriveFile[]} props.files
  * @param {string} props.folderId
- * @returns
  */
 export const StaticTree = ({ files, folderId }) => {
   return (
@@ -92,6 +97,23 @@ export const StaticTree = ({ files, folderId }) => {
         );
       })}
     </ul>
+  );
+};
+
+/**
+ * A hidden tree to load files without rendering the tree
+ * @param {PropsOf<typeof Tree>} props
+ */
+export const HiddenTree = ({ id, folderId, rootFolderId = folderId }) => {
+  const { data: files } = useQuery(`/drive/v3/files?q='${folderId}' in parents`, () => filesQuery(folderId));
+  return (
+    <>
+      {files?.map((file) =>
+        file.mimeType === 'application/vnd.google-apps.folder' ? (
+          <HiddenTree key={file.id} id={id} folderId={file.id} rootFolderId={rootFolderId} />
+        ) : null
+      )}
+    </>
   );
 };
 
