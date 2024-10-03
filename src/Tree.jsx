@@ -1,8 +1,7 @@
-import { Link } from 'wouter-preact';
-import { filesSignal } from './signals';
-import { Document, Folder } from './icons';
 import { useQuery } from 'preact-fetching';
-import { Fragment } from 'preact/jsx-runtime';
+import { Link } from 'wouter-preact';
+import { Document, Folder } from './icons';
+import { filesSignal } from './signals';
 
 const fetchFiles = async (id = '') => {
   const response = await gapi.client.request({

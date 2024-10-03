@@ -1,9 +1,9 @@
 import { render } from 'preact';
-import { useState, useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { useRoute } from 'wouter-preact';
 // import { CacheContext } from 'preact-fetching';
 import Page from './Page';
-import Tree, { HiddenTree } from './Tree';
+import Tree from './Tree';
 import { Spinner } from './icons';
 // import { DEV, host, protocol } from './constants';
 
