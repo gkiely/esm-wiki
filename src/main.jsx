@@ -27,7 +27,7 @@ import Tree, { HiddenTree } from './Tree';
 const Main = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const params = useRoute('/:folderId/:id?')[1] || {
+  const params = useRoute('/:folderId/:id?')[1] ?? {
     folderId: '1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q',
     id: '1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q',
   };

@@ -41,7 +41,6 @@ const fetchFile = async ({ id = '' }) => {
       includeItemsFromAllDrives: true,
     },
   });
-
   return response.result;
 };
 
