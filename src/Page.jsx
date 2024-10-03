@@ -1,11 +1,11 @@
+import { useQuery } from 'preact-fetching';
 import { useEffect } from 'preact/hooks';
+import { Link, useLocation } from 'wouter-preact';
+import { getPrevNext } from './getPrevNext';
+import { Folder, Pencil, Spinner } from './icons';
+import { parseContent } from './parseContent';
 import { filesSignal } from './signals.js';
 import { StaticTree } from './Tree.jsx';
-import { Link, useLocation } from 'wouter-preact';
-import { Folder, Pencil, Spinner } from './icons';
-import { getPrevNext } from './getPrevNext';
-import { parseContent } from './parseContent';
-import { useQuery } from 'preact-fetching';
 
 /**
  * Fetch content
@@ -118,7 +118,7 @@ const Page = ({ folderId = '', id = '' }) => {
       )}
       <h1>{file?.name}</h1>
       <div class="content">
-        {loading ? <Spinner /> : ''}
+        {loading ? <Spinner /> : null}
         {content ? <div dangerouslySetInnerHTML={{ __html: content }} /> : ''}
       </div>
       {file?.mimeType === 'application/vnd.google-apps.folder' && <StaticTree folderId={folderId} files={children} />}

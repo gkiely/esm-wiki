@@ -4,6 +4,7 @@ import { useRoute } from 'wouter-preact';
 // import { CacheContext } from 'preact-fetching';
 import Page from './Page';
 import Tree, { HiddenTree } from './Tree';
+import { Spinner } from './icons';
 // import { DEV, host, protocol } from './constants';
 
 // const cacheKey = 'wiki';
@@ -37,7 +38,7 @@ const Main = () => {
     gapi_loaded.promise.catch((err) => setError(err));
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Spinner />;
   if (error) return <div>Error: {error}</div>;
 
   // console.log('map', map);
@@ -47,7 +48,6 @@ const Main = () => {
     <div className="wrapper">
       {params.id && <Tree folderId={params?.folderId} id={params?.id} />}
 
-      {/* Alternative to loading files without Tree */}
       {/* {params.id && <HiddenTree folderId={params?.folderId} id={params?.id} />} */}
       <Page folderId={params?.folderId} id={params?.id} />
     </div>

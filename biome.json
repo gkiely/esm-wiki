@@ -51,7 +51,7 @@
     "lineWidth": 120
   },
   "organizeImports": {
-    "enabled": false
+    "enabled": true
   },
   "javascript": {
     "formatter": {
