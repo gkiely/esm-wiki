@@ -2,6 +2,11 @@ Dev
 - Biome [x]
 - Move to preact with JSX [x]
 - Update modules/import map [x]
+- move to react [x]
+  - migrate to react [x]
+  - setup global config for swr to disable [x]
+  - signals: https://www.npmjs.com/package/@preact/signals-react [x]
+  - write a wrapper for web components [x]
 
 Components
 - Page [x]

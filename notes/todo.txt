@@ -1,9 +1,4 @@
-- move to react
-  - migrate to react [x]
-  - setup global config for swr to disable [x]
-  - signals: https://www.npmjs.com/package/@preact/signals-react [x]
-  - write a wrapper for web components [x]
-- tests with bun
-- test out tailwind
-- test out ariakit
+- write tests with bun
+- try out tailwind - build a small component
+- try out ariakit - build a small component
 

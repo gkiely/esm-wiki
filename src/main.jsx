@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { SWRConfig } from 'swr';
 import { useRoute } from 'wouter';
+import { defaultParams } from './constants';
 import { Spinner } from './icons';
 import Page from './Page';
 import Tree from './Tree';
@@ -24,7 +25,7 @@ import Tree from './Tree';
 const Main = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const params = useRoute('/:folderId/:id?')[1];
+  const params = useRoute('/:folderId/:id?')[1] ?? defaultParams;
 
   useEffect(() => {
     gapi_loaded.promise.then(() => setLoading(false));
