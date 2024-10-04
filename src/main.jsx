@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { SWRConfig } from 'swr';
 import { useRoute } from 'wouter';
@@ -57,7 +57,11 @@ const rootEl = document.getElementById('root');
 if (!rootEl) throw new Error('Root element not found');
 if (import.meta.env.PROD || (import.meta.env.DEV && rootEl.innerHTML === '')) {
   const root = createRoot(rootEl);
-  root.render(<Main />);
+  root.render(
+    <StrictMode>
+      <Main />
+    </StrictMode>
+  );
 }
 
 // const Time = ({ startTime = new Date().toLocaleString() }) => {

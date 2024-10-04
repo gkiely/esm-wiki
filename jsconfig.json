@@ -11,6 +11,7 @@
     "skipLibCheck": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "esModuleInterop": false,
+    "jsx": "react-jsx",
 
     // Language settings
     "strict": true,
@@ -22,14 +23,6 @@
     "noErrorTruncation": true,
     "noFallthroughCasesInSwitch": true,
     "exactOptionalPropertyTypes": true,
-
-    "jsx": "react-jsx",
-    // "jsxImportSource": "preact",
-    // "paths": {
-		// 	"react": ["./node_modules/preact/compat/"],
-		// 	"react-dom": ["./node_modules/preact/compat/"]
-		// },
-    // "types": ["node"],
   },
   "include": ["types.d.ts", "global.d.ts", "src/**/*.js", "src/**/*.jsx"],
   "exclude": ["node_modules"],
