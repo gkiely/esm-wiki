@@ -48,7 +48,7 @@ export default defineConfig(({ command }) => ({
   ],
   build: {
     // Debug memo components
-    minify: false,
+    // minify: false,
     target: 'esnext',
     modulePreload: { polyfill: false },
     rollupOptions: {
