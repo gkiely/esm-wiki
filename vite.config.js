@@ -10,7 +10,9 @@ export default defineConfig(({ command }) => ({
     react({
       babel: {
         plugins: [
-          // ...(command === 'build' ? [['babel-plugin-react-compiler']] : []),c
+          // preact signals doesn't yet support react 19
+          // https://github.com/preactjs/signals/issues/580#issuecomment-2195568349
+          // ...(command === 'build' ? [['babel-plugin-react-compiler']] : []),
           ['module:@preact/signals-react-transform'],
         ],
       },
@@ -46,7 +48,7 @@ export default defineConfig(({ command }) => ({
   ],
   build: {
     // Debug memo components
-    // minify: false,
+    minify: false,
     target: 'esnext',
     modulePreload: { polyfill: false },
     rollupOptions: {
@@ -57,6 +59,7 @@ export default defineConfig(({ command }) => ({
             'react-dom',
             'react-dom/client',
             '@preact/signals-react',
+            // Preact signals doesn't yet support react 19
             // 'react/compiler-runtime',
             'scheduler',
             'swr',
@@ -68,6 +71,7 @@ export default defineConfig(({ command }) => ({
   },
   server: {
     open: true,
+    port: 3000,
   },
   preview: {
     port: 3000,

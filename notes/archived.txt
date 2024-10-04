@@ -40,3 +40,5 @@ const Context = createContext({
 
 import register from 'https://esm.sh/preact-custom-element';
 register(Main, 'app-main', [], { shadow: false });
+
+https://github.com/preactjs/signals/issues/580
