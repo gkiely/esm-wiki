@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import useSWR from 'swr';
 import { Link, useLocation } from 'wouter';
+import { StaticTree } from './Tree.jsx';
 import { getPrevNext } from './getPrevNext';
 import { Folder, Pencil, Spinner } from './icons';
 import { parseContent } from './parseContent';
 import { filesSignal } from './signals.js';
-import { StaticTree } from './Tree.jsx';
 
 /**
  * Fetch content

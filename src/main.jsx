@@ -2,10 +2,10 @@ import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { SWRConfig } from 'swr';
 import { useRoute } from 'wouter';
-import { defaultParams } from './constants';
-import { Spinner } from './icons';
 import Page from './Page';
 import Tree from './Tree';
+import { defaultParams } from './constants';
+import { Spinner } from './icons';
 // import { DEV, host, protocol } from './constants';
 
 // const cacheKey = 'wiki';

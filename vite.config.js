@@ -18,7 +18,9 @@ export default defineConfig(({ command }) => ({
     {
       apply: 'serve',
       ...checker({
-        biome: true,
+        biome: {
+          command: 'lint',
+        },
         overlay: {
           initialIsOpen: false,
         },
