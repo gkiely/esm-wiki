@@ -10,7 +10,7 @@ export default defineConfig(({ command }) => ({
     react({
       babel: {
         plugins: [
-          // ...(command === 'build' ? [['babel-plugin-react-compiler']] : []),
+          // ...(command === 'build' ? [['babel-plugin-react-compiler']] : []),c
           ['module:@preact/signals-react-transform'],
         ],
       },
@@ -18,6 +18,7 @@ export default defineConfig(({ command }) => ({
     {
       apply: 'serve',
       ...checker({
+        biome: true,
         overlay: {
           initialIsOpen: false,
         },
