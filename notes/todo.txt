@@ -1,4 +1,8 @@
-- move to react and https://www.npmjs.com/package/@preact/signals-react
+- move to react
+  - migrate to react [x]
+  - setup global config for swr to disable [x]
+  - signals: https://www.npmjs.com/package/@preact/signals-react [x]
+  - write a wrapper for web components [x]
 - tests with bun
 - test out tailwind
 - test out ariakit

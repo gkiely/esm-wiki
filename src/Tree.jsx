@@ -1,5 +1,5 @@
-import { useQuery } from 'preact-fetching';
-import { Link } from 'wouter-preact';
+import useSWR from 'swr';
+import { Link } from 'wouter';
 import { Document, Folder } from './icons';
 import { filesSignal } from './signals';
 
@@ -35,7 +35,9 @@ const getIcon = (mimeType = '', iconLink = '') => {
     return <Document />;
   }
 
-  return iconLink ? <img src={iconLink.replace('16', '32')} alt={mimeType} style="width: 1rem; height: 1rem;" /> : null;
+  return iconLink ? (
+    <img src={iconLink.replace('16', '32')} alt={mimeType} style={{ width: '1rem', height: '1rem' }} />
+  ) : null;
 };
 
 /**
@@ -45,7 +47,7 @@ const getIcon = (mimeType = '', iconLink = '') => {
  * @param {string} [props.rootFolderId]
  */
 const Tree = ({ id, folderId, rootFolderId = folderId }) => {
-  const { data: files } = useQuery(`/drive/v3/files?q='${folderId}' in parents`, () => filesQuery(folderId));
+  const { data: files } = useSWR(`/drive/v3/files?q='${folderId}' in parents`, () => filesQuery(folderId));
 
   return (
     <ul>
@@ -104,7 +106,7 @@ export const StaticTree = ({ files, folderId }) => {
  * @param {PropsOf<typeof Tree>} props
  */
 export const HiddenTree = ({ id, folderId, rootFolderId = folderId }) => {
-  const { data: files } = useQuery(`/drive/v3/files?q='${folderId}' in parents`, () => filesQuery(folderId));
+  const { data: files } = useSWR(`/drive/v3/files?q='${folderId}' in parents`, () => filesQuery(folderId));
   return (
     <>
       {files?.map((file) =>

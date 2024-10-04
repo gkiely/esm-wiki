@@ -21,8 +21,12 @@
     "@preact/preset-vite": "^2.9.1",
     "@preact/signals": "^1.3.0",
     "@preact/signals-react": "^2.2.0",
+    "@preact/signals-react-transform": "^0.4.0",
     "@types/node": "^22.7.4",
     "@types/preact-custom-element": "^4.0.4",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
     "bun": "^1.1.29",
     "install-changed": "^1.1.0",
     "patch-package": "^8.0.0",
@@ -35,6 +39,10 @@
     "preact": "^10.24.1",
     "preact-custom-element": "^4.3.0",
     "preact-fetching": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "swr": "^2.2.5",
+    "wouter": "^3.3.5",
     "wouter-preact": "^3.3.5"
   }
 }

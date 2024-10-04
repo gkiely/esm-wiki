@@ -1,10 +1,10 @@
-import { render } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
-import { useRoute } from 'wouter-preact';
-// import { CacheContext } from 'preact-fetching';
+import { useEffect, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import { SWRConfig } from 'swr';
+import { useRoute } from 'wouter';
+import { Spinner } from './icons';
 import Page from './Page';
 import Tree from './Tree';
-import { Spinner } from './icons';
 // import { DEV, host, protocol } from './constants';
 
 // const cacheKey = 'wiki';
@@ -21,17 +21,10 @@ import { Spinner } from './icons';
 // };
 // window.addEventListener('beforeunload', saveCache);
 
-// console.log('map', map);
-
-// const map = new Map();
-
 const Main = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const params = useRoute('/:folderId/:id?')[1] ?? {
-    folderId: '1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q',
-    id: '1NqCSiMuEfPfaHTumR_rX6J8zo7ygjx8q',
-  };
+  const params = useRoute('/:folderId/:id?')[1];
 
   useEffect(() => {
     gapi_loaded.promise.then(() => setLoading(false));
@@ -41,18 +34,39 @@ const Main = () => {
   if (loading) return <Spinner />;
   if (error) return <div>Error: {error}</div>;
 
-  // console.log('map', map);
-
   return (
-    // <CacheContext.Provider value={map}>
-    <div className="wrapper">
-      {params.id && <Tree folderId={params?.folderId} id={params?.id} />}
-
-      {/* {params.id && <HiddenTree folderId={params?.folderId} id={params?.id} />} */}
-      <Page folderId={params?.folderId} id={params?.id} />
-    </div>
-    // </CacheContext.Provider>
+    <SWRConfig
+      value={{
+        revalidateOnMount: true,
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        focusThrottleInterval: 1000,
+      }}
+    >
+      <div className="wrapper">
+        {params?.id && <Tree folderId={params?.folderId} id={params?.id} />}
+        <Page folderId={params?.folderId} id={params?.id} />
+      </div>
+    </SWRConfig>
   );
 };
 
-render(<Main />, document.body);
+const rootEl = document.getElementById('root');
+if (!rootEl) throw new Error('Root element not found');
+if (import.meta.env.PROD || (import.meta.env.DEV && rootEl.innerHTML === '')) {
+  const root = createRoot(rootEl);
+  root.render(<Main />);
+}
+
+// const Time = ({ startTime = new Date().toLocaleString() }) => {
+//   const [time, setTime] = useState(startTime);
+//   setInterval(() => {
+//     setTime(new Date().toLocaleTimeString());
+//   }, 1000);
+//   return <h1>{time}</h1>;
+// };
+
+// createWebComponent(Time, 'wc-time');
+
+export default Main;

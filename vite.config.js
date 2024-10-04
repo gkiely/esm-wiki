@@ -1,4 +1,4 @@
-import preact from '@preact/preset-vite';
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 
@@ -6,7 +6,11 @@ import checker from 'vite-plugin-checker';
 export default defineConfig({
   clearScreen: false,
   plugins: [
-    preact(),
+    react({
+      babel: {
+        plugins: [['module:@preact/signals-react-transform']],
+      },
+    }),
     {
       apply: 'serve',
       ...checker({

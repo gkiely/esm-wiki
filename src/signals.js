@@ -1,4 +1,4 @@
-import { signal } from '@preact/signals';
+import { signal } from '@preact/signals-react';
 
 /**
  * @type {import('@preact/signals').Signal<DriveFile[]>}

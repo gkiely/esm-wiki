@@ -1,6 +1,6 @@
-import { useQuery } from 'preact-fetching';
-import { useEffect } from 'preact/hooks';
-import { Link, useLocation } from 'wouter-preact';
+import { useEffect } from 'react';
+import useSWR from 'swr';
+import { Link, useLocation } from 'wouter';
 import { getPrevNext } from './getPrevNext';
 import { Folder, Pencil, Spinner } from './icons';
 import { parseContent } from './parseContent';
@@ -46,34 +46,24 @@ const fetchFile = async ({ id = '' }) => {
 
 const Page = ({ folderId = '', id = '' }) => {
   const files = filesSignal.value;
-  const {
-    data,
-    isLoading: isLoadingFile,
-    refetch: refetchFile,
-  } = useQuery(`/drive/v3/files/${id}`, () => fetchFile({ id }));
+  const { data, isLoading: isLoadingFile } = useSWR(`/drive/v3/files/${id}`, () => fetchFile({ id }), {
+    revalidateOnFocus: true,
+  });
 
   const file = data?.id === id ? data : files.find((o) => o.id === id);
 
-  const {
-    data: content,
-    isLoading: isLoadingContent,
-    refetch: refetchContent,
-  } = useQuery(file ? `/drive/v3/files/${id}/export` : null, () => {
-    if (file?.mimeType === 'application/vnd.google-apps.folder') return;
-    return fetchContent({ id });
-  });
+  const { data: content, isLoading: isLoadingContent } = useSWR(
+    file ? `/drive/v3/files/${id}/export` : null,
+    () => {
+      if (file?.mimeType === 'application/vnd.google-apps.folder') return;
+      return fetchContent({ id });
+    },
+    {
+      revalidateOnFocus: true,
+    }
+  );
 
   const loading = isLoadingFile || isLoadingContent;
-
-  useEffect(() => {
-    const cb = () => {
-      refetchFile();
-      refetchContent();
-    };
-
-    window.addEventListener('focus', cb);
-    return () => window.removeEventListener('focus', cb);
-  }, [id]);
 
   const children =
     file && file.mimeType === 'application/vnd.google-apps.folder'
@@ -105,26 +95,26 @@ const Page = ({ folderId = '', id = '' }) => {
   }, [id, prev?.id, next?.id]);
 
   return (
-    <div class="Page">
+    <div className="Page">
       {file?.mimeType === 'application/vnd.google-apps.folder' && (
-        <a target="_blank" class="button" href={`https://drive.google.com/drive/folders/${file.id}`}>
+        <a target="_blank" className="button" href={`https://drive.google.com/drive/folders/${file.id}`}>
           <Folder /> View in Drive
         </a>
       )}
       {file?.mimeType === 'application/vnd.google-apps.document' && (
-        <a target="_blank" class="button" href={`https://docs.google.com/document/d/${file.id}/edit`}>
+        <a target="_blank" className="button" href={`https://docs.google.com/document/d/${file.id}/edit`}>
           <Pencil /> Edit
         </a>
       )}
       <h1>{file?.name}</h1>
-      <div class="content">
+      <div className="content">
         {loading ? <Spinner /> : null}
         {content ? <div dangerouslySetInnerHTML={{ __html: content }} /> : ''}
       </div>
       {file?.mimeType === 'application/vnd.google-apps.folder' && <StaticTree folderId={folderId} files={children} />}
-      <div class="nav">
+      <div className="nav">
         {prev && <Link href={`/${folderId}/${prev.id}`}>← {prev.name}</Link>}
-        {prev && next && <span style="color: #646cff"> | </span>}
+        {prev && next && <span style={{ color: '#646cff' }}> | </span>}
         {next && <Link href={`/${folderId}/${next.id}`}>{next.name} →</Link>}
       </div>
     </div>
