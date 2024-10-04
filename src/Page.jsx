@@ -12,18 +12,23 @@ import { filesSignal } from './signals.js';
  * https://developers.google.com/drive/api/reference/rest/v3/files/export
  * @param {object} options
  * @param {string} options.id
+ * @param {DriveMimeType} [options.mimeType]
  */
-const fetchContent = async ({ id }) => {
-  const response = await gapi.client.request({
-    path: `https://www.googleapis.com/drive/v3/files/${id}/export`,
-    params: {
-      fields: '*',
-      mimeType: 'text/html',
-      supportsAllDrives: true,
-      includeItemsFromAllDrives: true,
-    },
-  });
-  return parseContent(response.body);
+const fetchContent = async ({ id, mimeType }) => {
+  if (mimeType === 'application/vnd.google-apps.folder') return;
+  if (mimeType === 'application/vnd.google-apps.document') {
+    const response = await gapi.client.request({
+      path: `https://www.googleapis.com/drive/v3/files/${id}/export`,
+      params: {
+        fields: '*',
+        mimeType: 'text/html',
+        supportsAllDrives: true,
+        includeItemsFromAllDrives: true,
+      },
+    });
+    return parseContent(response.body);
+  }
+  return;
 };
 
 /**
@@ -36,7 +41,7 @@ const fetchFile = async ({ id }) => {
   const response = await gapi.client.request({
     path: `https://www.googleapis.com/drive/v3/files/${id}`,
     params: {
-      fields: '*',
+      fields: 'id,name,mimeType,iconLink,parents',
       supportsAllDrives: true,
       includeItemsFromAllDrives: true,
     },
@@ -45,19 +50,16 @@ const fetchFile = async ({ id }) => {
 };
 
 const Page = ({ folderId = '', id = '' }) => {
-  const files = filesSignal.value;
   const { data, isLoading: isLoadingFile } = useSWR(`/drive/v3/files/${id}`, () => fetchFile({ id }), {
     revalidateOnFocus: true,
   });
 
+  const files = filesSignal.value;
   const file = data?.id === id ? data : files.find((o) => o.id === id);
 
   const { data: content, isLoading: isLoadingContent } = useSWR(
     file ? `/drive/v3/files/${id}/export` : null,
-    () => {
-      if (file?.mimeType === 'application/vnd.google-apps.folder') return;
-      return fetchContent({ id });
-    },
+    () => fetchContent({ id, mimeType: file?.mimeType }),
     {
       revalidateOnFocus: true,
     }

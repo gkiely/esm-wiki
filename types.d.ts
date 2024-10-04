@@ -163,6 +163,8 @@ type ExportMimeType =
   | 'image/png'
   | 'image/svg+xml';
 
+type DriveMimeType = DriveFile['mimeType'];
+
 type GapiResponse<T> = GapiPromise<{
   body: string;
   headers: {

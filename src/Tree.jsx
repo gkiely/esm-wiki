@@ -8,7 +8,7 @@ const fetchFiles = async (id = '') => {
     path: 'https://www.googleapis.com/drive/v3/files',
     params: {
       q: `'${id}' in parents and trashed = false`,
-      fields: '*',
+      fields: 'files(id,name,mimeType,iconLink,parents)',
       supportsAllDrives: true,
       includeItemsFromAllDrives: true,
     },

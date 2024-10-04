@@ -1,6 +1,7 @@
 - get react compiler working [x]
   - see if you can get it working [x]
-  - disable for static tree []
+  - disable for static tree [x]
+- move to typescript []
 - write tests with bun
 - try out tailwind - build a small component
 - try out ariakit - build a small component
