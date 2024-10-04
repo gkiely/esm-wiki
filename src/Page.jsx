@@ -32,7 +32,7 @@ const fetchContent = async ({ id }) => {
  * @param {object} options
  * @param {string} options.id
  */
-const fetchFile = async ({ id = '' }) => {
+const fetchFile = async ({ id }) => {
   const response = await gapi.client.request({
     path: `https://www.googleapis.com/drive/v3/files/${id}`,
     params: {
