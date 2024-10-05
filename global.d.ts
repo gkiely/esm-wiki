@@ -22,3 +22,12 @@ declare module 'bun:test' {
   interface Matchers<T> extends TestingLibraryMatchers<typeof expect.stringContaining, T> {}
   interface AsymmetricMatchers extends TestingLibraryMatchers {}
 }
+
+declare global {
+  interface String {
+    replace(
+      searchValue: string | RegExp,
+      replaceValue: string | ((substring: string, ...args: string[]) => string)
+    ): string;
+  }
+}

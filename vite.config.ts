@@ -34,7 +34,7 @@ export default defineConfig(({ command }) => ({
     },
     {
       name: 'clear-console',
-      apply: 'serve',
+      apply: () => command === 'serve',
       config: () => console.clear(),
       watchChange: (path) => (path.includes('src') ? console.clear() : undefined),
     },

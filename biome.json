@@ -7,6 +7,7 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "recommended": true,
       "style": {
         "useConst": "off",
         "useImportType": "off",
@@ -14,7 +15,6 @@
         "useNumberNamespace": "off",
         "noUnusedTemplateLiteral": "off"
       },
-      "recommended": true,
       "security": {
         "noDangerouslySetInnerHtml": "off"
       },
@@ -34,7 +34,8 @@
         "noAssignInExpressions": "off",
         "noConfusingVoidType": "off",
         "noFocusedTests": "off",
-        "noConsole": "warn"
+        "noConsole": "warn",
+        "noExplicitAny": "error"
       },
       "correctness": {
         "useExhaustiveDependencies": "warn",

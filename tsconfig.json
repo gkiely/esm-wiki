@@ -25,6 +25,7 @@
     "noErrorTruncation": true,
     "noFallthroughCasesInSwitch": true,
     "exactOptionalPropertyTypes": true,
+    "noImplicitAny": true,
   },
   "include": ["types.d.ts", "global.d.ts", "src", "preload.ts"],
   "exclude": ["node_modules", "dist"],
