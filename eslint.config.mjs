@@ -3,7 +3,6 @@ import tseslint from 'typescript-eslint';
 // https://typescript-eslint.io/packages/typescript-eslint/#advanced-usage
 export default tseslint.config({
   files: ['src/**/*.ts', 'src/**/*.tsx'],
-  ignores: ['node_modules', 'dist'],
   plugins: {
     '@typescript-eslint': tseslint.plugin,
   },
