@@ -37,7 +37,8 @@
       },
       "correctness": {
         "useExhaustiveDependencies": "off",
-        "noUnusedImports": "warn"
+        "noUnusedImports": "warn",
+        "useHookAtTopLevel": "error"
       },
       "complexity": {
         "noForEach": "off",

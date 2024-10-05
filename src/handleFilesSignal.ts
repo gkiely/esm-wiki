@@ -3,10 +3,6 @@ import { filesSignal } from './signals';
 
 export const handleFilesSignal: Middleware = (useSWRNext) => (key, fetcher, config) => {
   // const cache = useSWRConfig().cache;
-
-  /**
-   * @param {string[]} args
-   */
   const extendedFetcher = async (...args: string[]) => {
     const id = args[0];
     if (!id) throw new Error('id is required');
