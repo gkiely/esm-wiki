@@ -10,4 +10,15 @@
 - try out ariakit - build a small component
 - try out tailwind - build a small component
 - set up vanilla extract
+- set up a separate branch in youneedawiki, copy over these files, create components
+  - title
+  - last modified
+  - breadcrumbs
+  - prevNext
+    - create a new single function
+  - wikiselector
+  - poweredby
+  - icon
+  - static tree
+  - page
 - migrate changes to youneedawiki
