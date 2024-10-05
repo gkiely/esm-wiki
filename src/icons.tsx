@@ -1,22 +1,15 @@
-/**
- * @param {TemplateStringsArray} s
- * @param {...(unknown)} values
- */
-const cssToObj = (s, ...values) =>
+const cssToObj = (s: TemplateStringsArray, ...values: unknown[]) =>
   s
     .reduce((acc, str, i) => acc + str + (values[i] || ''), '')
     .split(';')
     .filter((x) => x)
-    .reduce(
-      (acc, x) => {
-        const [key, value] = x.split(':');
-        if (!key || !value) return acc;
-        const camelCaseKey = key.trim().replace(/-([a-z])/g, (_, char) => char.toUpperCase());
-        acc[camelCaseKey] = value.trim();
-        return acc;
-      },
-      /** @type Record<string, string> */ ({})
-    );
+    .reduce<Record<string, string>>((acc, x) => {
+      const [key, value] = x.split(':');
+      if (!key || !value) return acc;
+      const camelCaseKey = key.trim().replace(/-([a-z])/g, (_, char) => char.toUpperCase());
+      acc[camelCaseKey] = value.trim();
+      return acc;
+    }, {});
 
 export const Folder = () => (
   <div style={cssToObj`display: flex; flex: 1 0 1rem; max-width: 1rem;`}>

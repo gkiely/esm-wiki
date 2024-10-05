@@ -1,10 +1,4 @@
-/**
- * @param {object} props
- * @param {DriveFile | undefined} props.file
- * @param {DriveFile[]} props.files
- * @param {string} props.id
- */
-export const getPrevNext = ({ file, files, id }) => {
+export const getPrevNext = ({ file, files, id }: { file: DriveFile | undefined; files: DriveFile[]; id: string }) => {
   if (!file || files.length === 0) return { prev: undefined, next: undefined };
   const f = files.find((o) => o.id === id);
   if (f?.parents?.[0] && !file.parents?.[0]) {

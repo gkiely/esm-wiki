@@ -23,11 +23,9 @@ export default defineConfig(({ command }) => ({
         biome: {
           command: 'lint',
         },
+        typescript: true,
         overlay: {
           initialIsOpen: false,
-        },
-        typescript: {
-          tsconfigPath: './jsconfig.json',
         },
       }),
     },

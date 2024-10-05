@@ -10,11 +10,8 @@ import { filesSignal } from './signals.js';
 /**
  * Fetch content
  * https://developers.google.com/drive/api/reference/rest/v3/files/export
- * @param {object} options
- * @param {string} options.id
- * @param {DriveMimeType} [options.mimeType]
  */
-const fetchContent = async ({ id, mimeType }) => {
+const fetchContent = async ({ id, mimeType }: { id: string; mimeType: DriveMimeType | undefined }) => {
   if (mimeType === 'application/vnd.google-apps.folder') return;
   if (mimeType === 'application/vnd.google-apps.document') {
     const response = await gapi.client.request({
@@ -34,10 +31,8 @@ const fetchContent = async ({ id, mimeType }) => {
 /**
  * Fetch file
  * https://developers.google.com/drive/api/reference/rest/v3/files/get
- * @param {object} options
- * @param {string} options.id
  */
-const fetchFile = async ({ id }) => {
+const fetchFile = async ({ id }: { id: string }) => {
   const response = await gapi.client.request({
     path: `https://www.googleapis.com/drive/v3/files/${id}`,
     params: {
@@ -76,10 +71,7 @@ const Page = ({ folderId = '', id = '' }) => {
   const setLocation = useLocation()[1];
 
   useEffect(() => {
-    /**
-     * @param {KeyboardEvent} event
-     */
-    const cb = (event) => {
+    const cb = (event: KeyboardEvent) => {
       if (event.key === 'e') {
         if (file?.mimeType === 'application/vnd.google-apps.folder')
           return window.open(`https://drive.google.com/drive/folders/${id}`, '_blank');

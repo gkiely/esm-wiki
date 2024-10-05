@@ -4,8 +4,8 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "incremental": true,
-    "checkJs": true,
-    "allowJs": true,
+    "checkJs": false,
+    "allowJs": false,
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true,
@@ -24,6 +24,6 @@
     "noFallthroughCasesInSwitch": true,
     "exactOptionalPropertyTypes": true,
   },
-  "include": ["types.d.ts", "global.d.ts", "src/**/*.js", "src/**/*.jsx"],
+  "include": ["types.d.ts", "global.d.ts", "src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"],
 }

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "types": ["node", "@cloudflare/workers-types", "@types/bun"],
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "useUnknownInCatchVariables": true,
+    "noErrorTruncation": true,
+    "useDefineForClassFields": true
+  },
+  "include": ["vite.config.ts", "playwright.config.ts", "playwright-web.config.ts", "*.spec.ts", "package.json", "./server/**/*.ts", "./scripts/**/*.ts", "scripts/**/*.js", "scripts/**/*.js"]
+}

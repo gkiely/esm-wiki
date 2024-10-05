@@ -17,10 +17,7 @@ const fetchFiles = async (id = '') => {
   return response.result.files;
 };
 
-/**
- * @param {string} id
- */
-const filesQuery = async (id) => {
+const filesQuery = async (id: string) => {
   const files = (await fetchFiles(id)).filter((file) => file.name !== 'wiki.logo' && file.name !== 'wiki.page');
   filesSignal.value = [...filesSignal.value, ...files];
   return files;
@@ -40,13 +37,7 @@ const getIcon = (mimeType = '', iconLink = '') => {
   ) : null;
 };
 
-/**
- * @param {object} props
- * @param {string} props.id
- * @param {string} props.folderId
- * @param {string} [props.rootFolderId]
- */
-const Tree = ({ id, folderId, rootFolderId = folderId }) => {
+const Tree = ({ id, folderId, rootFolderId = folderId }: { id: string; folderId: string; rootFolderId?: string }) => {
   const { data: files } = useSWR(`/drive/v3/files?q='${folderId}' in parents`, () => filesQuery(folderId));
 
   return (
@@ -79,12 +70,7 @@ const Tree = ({ id, folderId, rootFolderId = folderId }) => {
   );
 };
 
-/**
- * @param {object} props
- * @param {DriveFile[]} props.files
- * @param {string} props.folderId
- */
-export const StaticTree = ({ files, folderId }) => {
+export const StaticTree = ({ files, folderId }: { files: DriveFile[]; folderId: string }) => {
   return (
     <ul>
       {files?.map((file) => {
@@ -101,11 +87,7 @@ export const StaticTree = ({ files, folderId }) => {
   );
 };
 
-/**
- * A hidden tree to load files without rendering the tree
- * @param {PropsOf<typeof Tree>} props
- */
-export const HiddenTree = ({ id, folderId, rootFolderId = folderId }) => {
+export const HiddenTree = ({ id, folderId, rootFolderId = folderId }: PropsOf<typeof Tree>) => {
   const { data: files } = useSWR(`/drive/v3/files?q='${folderId}' in parents`, () => filesQuery(folderId));
   return (
     <>

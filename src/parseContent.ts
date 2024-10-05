@@ -1,7 +1,4 @@
-/**
- * @param {string} url
- */
-function getDomain(url) {
+function getDomain(url: string) {
   const hostname = new URL(url).hostname;
   const parts = hostname.split('.');
   return parts.length > 2 ? parts.slice(-2).join('.') : hostname;
@@ -10,10 +7,7 @@ function getDomain(url) {
 const DEV = window.location.hostname === 'localhost';
 
 const whitelist = ['youtube.com', 'loom.com', 'google.com', 'docs.google.com', 'drive.google.com'];
-/**
- * Parses iframe content
- * @param {string} html
- */
+
 export const parseContent = (html = '') => {
   return (
     html
