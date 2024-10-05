@@ -2,7 +2,7 @@
   "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
   "files": {
     "include": ["src", "*.ts", "*.tsx", "*.mjs"],
-    "ignore": ["*.json"]
+    "ignore": ["*.json", "preload.ts"]
   },
   "linter": {
     "enabled": true,

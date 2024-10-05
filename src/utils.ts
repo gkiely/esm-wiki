@@ -1,4 +1,4 @@
-import { createElement, type FC } from 'react';
+import { type FC, createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { DEV, mimeTypes } from './constants';
 

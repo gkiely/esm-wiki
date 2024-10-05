@@ -1,3 +1,4 @@
+import compiler from 'eslint-plugin-react-compiler';
 import tseslint from 'typescript-eslint';
 
 // https://typescript-eslint.io/packages/typescript-eslint/#advanced-usage
@@ -5,6 +6,7 @@ export default tseslint.config({
   files: ['src/**/*.ts', 'src/**/*.tsx'],
   plugins: {
     '@typescript-eslint': tseslint.plugin,
+    'react-compiler': compiler,
   },
   languageOptions: {
     parser: tseslint.parser,
@@ -27,5 +29,6 @@ export default tseslint.config({
       },
     ],
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+    'react-compiler/react-compiler': 'error',
   },
 });
