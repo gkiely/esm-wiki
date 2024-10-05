@@ -4,7 +4,8 @@
 - move to typescript [x]
 - create useFile hook [x]
 - figure out why useFile is not caching files [x]
+- get compiler working [x]
+- add no floating promise []
 - write tests with bun []
-- add no floating promise
 - try out ariakit - build a small component
 - try out tailwind - build a small component

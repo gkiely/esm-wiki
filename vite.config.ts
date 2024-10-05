@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import swc from '@vitejs/plugin-react-swc';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
@@ -7,16 +8,13 @@ import checker from 'vite-plugin-checker';
 export default defineConfig(({ command }) => ({
   clearScreen: false,
   plugins: [
-    react({
-      babel: {
-        plugins: [
-          // preact signals doesn't yet support react 19
-          // https://github.com/preactjs/signals/issues/580#issuecomment-2195568349
-          // ...(command === 'build' ? [['babel-plugin-react-compiler']] : []),
-          ['module:@preact/signals-react-transform'],
-        ],
-      },
-    }),
+    command === 'serve'
+      ? swc({ devTarget: 'esnext' })
+      : react({
+          babel: {
+            plugins: [['babel-plugin-react-compiler']],
+          },
+        }),
     {
       apply: 'serve',
       ...checker({
@@ -57,8 +55,7 @@ export default defineConfig(({ command }) => ({
             'react-dom',
             'react-dom/client',
             '@preact/signals-react',
-            // Preact signals doesn't yet support react 19
-            // 'react/compiler-runtime',
+            'react/compiler-runtime',
             'scheduler',
             'swr',
             'wouter',

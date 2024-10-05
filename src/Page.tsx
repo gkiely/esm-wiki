@@ -68,6 +68,7 @@ const Page = ({ folderId = '', id = '' }) => {
   const { prev, next } = getPrevNext({ file, files, id });
   const setLocation = useLocation()[1];
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentional
   useEffect(() => {
     const cb = (event: KeyboardEvent) => {
       if (event.key === 'e') {
