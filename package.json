@@ -66,6 +66,8 @@
   },
   "overrides": {
     "react": "$react",
-    "react-dom": "$react-dom"
+    "react-dom": "$react-dom",
+    "is-core-module": "npm:@nolyfill/is-core-module@^1",
+    "json-stable-stringify": "npm:@nolyfill/json-stable-stringify@^1"
   }
 }

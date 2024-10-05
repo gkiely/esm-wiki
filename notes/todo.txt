@@ -9,3 +9,5 @@
 - write tests with bun [x]
 - try out ariakit - build a small component
 - try out tailwind - build a small component
+- set up vanilla extract
+- migrate changes to youneedawiki
