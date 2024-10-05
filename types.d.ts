@@ -113,6 +113,7 @@ type DriveFile =
         | 'video/mp4'
         | 'video/quicktime'
         | 'text/markdown'
+        | 'text/x-markdown'
         | 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
         | 'application/pdf'
         | 'application/x-iwork-numbers-sffnumbers'

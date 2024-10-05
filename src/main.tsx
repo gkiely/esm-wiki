@@ -1,26 +1,33 @@
 import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { SWRConfig } from 'swr';
+import { Cache, SWRConfig } from 'swr';
 import { useRoute } from 'wouter';
 import Page from './Page';
 import Tree from './Tree';
-import { defaultParams } from './constants';
+import { debug, defaultParams, DEV, host, protocol } from './constants';
 import { Spinner } from './icons';
-// import { DEV, host, protocol } from './constants';
 
-// const cacheKey = 'wiki';
-// const isHttpDev = DEV && protocol === 'http:' && host !== 'localhost';
-// const cache = isHttpDev
-//   ? { match: () => ({ json: () => {} }), put: () => {}, delete: () => {} }
-//   : await caches.open('app');
+const createCacheProvider = async () => {
+  const cacheKey = 'wiki';
+  const isHttpDev = DEV && protocol === 'http:' && host !== 'localhost';
+  const cache = isHttpDev
+    ? { match: () => ({ json: () => {} }), put: () => {}, delete: () => {} }
+    : await caches.open('app');
 
-// // cache.delete(cacheKey);
-// const cachedData = await cache.match(cacheKey);
-// const map = cachedData ? new Map(await cachedData.json()) : new Map();
-// const saveCache = async () => {
-//   cache.put(cacheKey, new Response(JSON.stringify([...map])));
-// };
-// window.addEventListener('beforeunload', saveCache);
+  if (debug) {
+    await cache.delete(cacheKey);
+  }
+  const cachedData = await cache.match(cacheKey);
+  const map = cachedData ? new Map(await cachedData.json()) : new Map();
+  const saveCache = async () => {
+    cache.put(cacheKey, new Response(JSON.stringify([...map])));
+  };
+  window.addEventListener('beforeunload', saveCache);
+  if (DEV) window.cache = map;
+  return () => map as Cache;
+};
+
+const cacheProvider = typeof window.caches === 'undefined' ? undefined : await createCacheProvider();
 
 const Main = () => {
   const [loading, setLoading] = useState(true);
@@ -38,6 +45,7 @@ const Main = () => {
   return (
     <SWRConfig
       value={{
+        ...(cacheProvider && { provider: cacheProvider }),
         revalidateOnMount: true,
         revalidateIfStale: false,
         revalidateOnFocus: false,

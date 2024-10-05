@@ -3,9 +3,9 @@ import useSWR from 'swr';
 import { Link, useLocation } from 'wouter';
 import { StaticTree } from './Tree.jsx';
 import { getPrevNext } from './getPrevNext';
+import { useFiles } from './hooks.js';
 import { Folder, Pencil, Spinner } from './icons';
 import { parseContent } from './parseContent';
-import { filesSignal } from './signals.js';
 
 /**
  * Fetch content
@@ -45,13 +45,11 @@ const fetchFile = async ({ id }: { id: string }) => {
 };
 
 const Page = ({ folderId = '', id = '' }) => {
-  const { data, isLoading: isLoadingFile } = useSWR(`/drive/v3/files/${id}`, () => fetchFile({ id }), {
+  const { files } = useFiles({ id: folderId });
+  const { data: _file, isLoading: isLoadingFile } = useSWR(`/drive/v3/files/${id}`, () => fetchFile({ id }), {
     revalidateOnFocus: true,
   });
-
-  const files = filesSignal.value;
-  const file = data?.id === id ? data : files.find((o) => o.id === id);
-
+  const file = _file?.id === id ? _file : files.find((o) => o.id === id);
   const { data: content, isLoading: isLoadingContent } = useSWR(
     file ? `/drive/v3/files/${id}/export` : null,
     () => fetchContent({ id, mimeType: file?.mimeType }),

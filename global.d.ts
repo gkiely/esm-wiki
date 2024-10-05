@@ -9,4 +9,12 @@ declare global {
   }
 }
 
-export {};
+// Add window.cache
+declare global {
+  interface Window {
+    cache: Map<unknown, unknown>;
+  }
+}
+
+export { };
+
