@@ -27,6 +27,9 @@ export default defineConfig(({ command }) => ({
           command: 'lint',
         },
         typescript: true,
+        stylelint: {
+          lintCommand: 'stylelint --cache ./src/**/*.css',
+        },
         overlay: {
           initialIsOpen: false,
         },
