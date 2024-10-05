@@ -1,6 +1,6 @@
 import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Cache, SWRConfig } from 'swr';
+import { type Cache, SWRConfig } from 'swr';
 import { useRoute } from 'wouter';
 import Page from './Page';
 import Tree from './Tree';

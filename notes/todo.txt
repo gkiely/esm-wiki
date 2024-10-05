@@ -6,6 +6,6 @@
 - figure out why useFile is not caching files [x]
 - get compiler working [x]
 - add eslint/no floating promise [x]
-- write tests with bun []
+- write tests with bun [x]
 - try out ariakit - build a small component
 - try out tailwind - build a small component

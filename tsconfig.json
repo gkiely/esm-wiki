@@ -2,21 +2,23 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
     "incremental": true,
     "checkJs": false,
     "allowJs": false,
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "esModuleInterop": false,
     "jsx": "react-jsx",
+    "types": ["@types/bun", "@testing-library/jest-dom"],
 
     // Language settings
     "strict": true,
-    "noUnusedParameters": true,
     "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noUncheckedIndexedAccess": true,
     "useUnknownInCatchVariables": true,
     "allowUnreachableCode": false,
@@ -24,6 +26,6 @@
     "noFallthroughCasesInSwitch": true,
     "exactOptionalPropertyTypes": true,
   },
-  "include": ["types.d.ts", "global.d.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "include": ["types.d.ts", "global.d.ts", "src", "preload.ts"],
   "exclude": ["node_modules", "dist"],
 }

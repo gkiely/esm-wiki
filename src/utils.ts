@@ -1,8 +1,8 @@
-import { FC, createElement } from 'react';
+import { createElement, type FC } from 'react';
 import { createRoot } from 'react-dom/client';
 import { DEV, mimeTypes } from './constants';
 
-const toCamelCase = (str = '') => str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+export const toCamelCase = (str = '') => str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 
 export const createWebComponent = (Component: FC, name: string) => {
   class WebComponent extends HTMLElement {
