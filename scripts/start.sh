@@ -1,5 +1,4 @@
-rm -f tsconfig.tsbuildinfo
-rm -f .eslintcache
+rm -f tsconfig.tsbuildinfo .eslintcache
 
 if [[ ! -d ./node_modules ]]; then
   echo "No node_modules found. Installing..."

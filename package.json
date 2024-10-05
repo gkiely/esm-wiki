@@ -20,7 +20,7 @@
     "install-react-rc": "npm install --no-save --no-audit --no-fund --progress=false react@rc react-dom@rc",
     "build": "npx react-compiler-healthcheck@latest --yes && bun run install-react-rc && vite build && ([ -z \"$CI\" ] && bun run install-react || true)",
     "preview": "bun run build && vite preview",
-    "install-latest": "npm i --no-fund $(bun --silent ./scripts/install-latest.ts) && npx @biomejs/biome migrate --write && bun run postinstall",
+    "install-latest": "npm i --no-fund $(bun --silent ./scripts/install-latest.ts) && npx @biomejs/biome migrate --write && biome clean && bun run postinstall",
     "tsc": "tsc",
     "postinstall": "patch-package"
   },
