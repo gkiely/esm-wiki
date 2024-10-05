@@ -22,5 +22,5 @@
     "noErrorTruncation": true,
     "useDefineForClassFields": true
   },
-  "include": ["vite.config.ts", "playwright.config.ts", "playwright-web.config.ts", "*.spec.ts", "package.json", "./server/**/*.ts", "./scripts/**/*.ts", "scripts/**/*.js", "scripts/**/*.js"]
+  "include": ["vite.config.ts", "playwright.config.ts", "playwright-web.config.ts", "*.spec.ts", "package.json", "./server/**/*.ts", "./scripts", "plugins"]
 }

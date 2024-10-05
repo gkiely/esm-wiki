@@ -3,6 +3,7 @@ import swc from '@vitejs/plugin-react-swc';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
+import cssModules from './plugins/typed-css-modules-plugin';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => ({
@@ -44,6 +45,10 @@ export default defineConfig(({ command }) => ({
         gzipSize: true,
         open: true,
       }),
+    },
+    {
+      apply: 'serve',
+      ...cssModules(),
     },
   ],
   build: {

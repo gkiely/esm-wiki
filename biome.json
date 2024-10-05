@@ -65,7 +65,7 @@
   },
   "overrides": [
     {
-      "include": ["logger.ts", "scripts/*.ts"],
+      "include": ["logger.ts", "scripts/*.ts", "plugins/*.ts"],
       "linter": {
         "rules": {
           "suspicious": {
