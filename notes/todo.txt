@@ -10,7 +10,9 @@
 - try out ariakit - build a small component
 - try out tailwind - build a small component
 - set up vanilla extract
-- set up a separate branch in youneedawiki, copy over these files, create components
+- set up a separate branch in youneedawiki, copy over these files
+- setup auth so it is called in main, hooks no longer need loaded
+- create components
   - title
   - last modified
   - breadcrumbs

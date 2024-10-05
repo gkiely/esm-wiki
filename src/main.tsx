@@ -71,14 +71,4 @@ if (import.meta.env.PROD || (import.meta.env.DEV && rootEl.innerHTML === '')) {
   );
 }
 
-// const Time = ({ startTime = new Date().toLocaleString() }) => {
-//   const [time, setTime] = useState(startTime);
-//   setInterval(() => {
-//     setTime(new Date().toLocaleTimeString());
-//   }, 1000);
-//   return <h1>{time}</h1>;
-// };
-
-// createWebComponent(Time, 'wc-time');
-
 export default Main;

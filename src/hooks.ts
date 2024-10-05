@@ -9,7 +9,6 @@ import { recursiveFetch } from './recursiveFetch';
 export const useFiles = ({ id, email }: { id: string | undefined; email?: string; hidden?: boolean }) => {
   const [streamed, setStreamed] = useState<DriveFile[]>([]);
   const idRef = useRef<string | undefined>(id);
-
   const swr = useSWR(
     id
       ? {

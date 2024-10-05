@@ -42,3 +42,13 @@ import register from 'https://esm.sh/preact-custom-element';
 register(Main, 'app-main', [], { shadow: false });
 
 https://github.com/preactjs/signals/issues/580
+
+// const Time = ({ startTime = new Date().toLocaleString() }) => {
+//   const [time, setTime] = useState(startTime);
+//   setInterval(() => {
+//     setTime(new Date().toLocaleTimeString());
+//   }, 1000);
+//   return <h1>{time}</h1>;
+// };
+
+// createWebComponent(Time, 'wc-time');
