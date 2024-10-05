@@ -49,6 +49,7 @@ export default defineConfig(({ command }) => ({
   build: {
     // Debug memo components
     // minify: false,
+    cssMinify: 'lightningcss',
     target: 'esnext',
     modulePreload: { polyfill: false },
     rollupOptions: {
@@ -58,6 +59,9 @@ export default defineConfig(({ command }) => ({
         },
       },
     },
+  },
+  css: {
+    transformer: 'lightningcss',
   },
   server: {
     open: true,

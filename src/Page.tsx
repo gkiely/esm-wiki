@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import useSWR from 'swr';
 import { Link, useLocation } from 'wouter';
-import { StaticTree } from './Tree.jsx';
 import { getPrevNext } from './getPrevNext';
 import { useFiles } from './hooks.js';
 import { Folder, Pencil, Spinner } from './icons';
+import styles from './page.module.css';
 import { parseContent } from './parseContent';
+import { StaticTree } from './Tree.jsx';
 
 /**
  * Fetch content
@@ -88,24 +89,24 @@ const Page = ({ folderId = '', id = '' }) => {
   }, [id, prev?.id, next?.id]);
 
   return (
-    <div className="Page">
+    <div className={styles.page}>
       {file?.mimeType === 'application/vnd.google-apps.folder' && (
-        <a target="_blank" className="button" href={`https://drive.google.com/drive/folders/${file.id}`}>
+        <a target="_blank" className={styles.button} href={`https://drive.google.com/drive/folders/${file.id}`}>
           <Folder /> View in Drive
         </a>
       )}
       {file?.mimeType === 'application/vnd.google-apps.document' && (
-        <a target="_blank" className="button" href={`https://docs.google.com/document/d/${file.id}/edit`}>
+        <a target="_blank" className={styles.button} href={`https://docs.google.com/document/d/${file.id}/edit`}>
           <Pencil /> Edit
         </a>
       )}
       <h1>{file?.name}</h1>
-      <div className="content">
+      <div>
         {loading ? <Spinner /> : null}
         {content ? <div dangerouslySetInnerHTML={{ __html: content }} /> : ''}
       </div>
       {file?.mimeType === 'application/vnd.google-apps.folder' && <StaticTree folderId={folderId} files={children} />}
-      <div className="nav">
+      <div>
         {prev && <Link href={`/${folderId}/${prev.id}`}>← {prev.name}</Link>}
         {prev && next && <span style={{ color: '#646cff' }}> | </span>}
         {next && <Link href={`/${folderId}/${next.id}`}>{next.name} →</Link>}
