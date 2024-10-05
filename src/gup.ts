@@ -1,5 +1,4 @@
 const gup = (name: string, url = window.location.href) => {
-  // eslint-disable-next-line regexp/no-useless-escape, no-useless-escape
   const query = name.replace(/[\[\]]/g, '\\$&');
   const regex = new RegExp(`[?&]${query}(=([^&#]*)|&|#|$)`);
   const results = regex.exec(url);

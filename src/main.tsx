@@ -4,7 +4,7 @@ import { Cache, SWRConfig } from 'swr';
 import { useRoute } from 'wouter';
 import Page from './Page';
 import Tree from './Tree';
-import { debug, defaultParams, DEV, host, protocol } from './constants';
+import { DEV, debug, defaultParams, host, protocol } from './constants';
 import { Spinner } from './icons';
 
 const createCacheProvider = async () => {
@@ -20,7 +20,7 @@ const createCacheProvider = async () => {
   const cachedData = await cache.match(cacheKey);
   const map = cachedData ? new Map(await cachedData.json()) : new Map();
   const saveCache = async () => {
-    cache.put(cacheKey, new Response(JSON.stringify([...map])));
+    await cache.put(cacheKey, new Response(JSON.stringify([...map])));
   };
   window.addEventListener('beforeunload', saveCache);
   if (DEV) window.cache = map;
@@ -35,8 +35,7 @@ const Main = () => {
   const params = useRoute('/:folderId/:id?')[1] ?? defaultParams;
 
   useEffect(() => {
-    gapi_loaded.promise.then(() => setLoading(false));
-    gapi_loaded.promise.catch((err) => setError(err));
+    gapi_loaded.promise.then(() => setLoading(false)).catch((err) => setError(err));
   }, []);
 
   if (loading) return <Spinner />;

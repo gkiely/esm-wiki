@@ -1,7 +1,6 @@
 import { isBun } from './constants';
 import gup from './gup';
 
-/* eslint-disable no-console */
 enum LogLevel {
   INFO = 0,
   DEBUG = 1,

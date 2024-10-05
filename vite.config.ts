@@ -18,6 +18,10 @@ export default defineConfig(({ command }) => ({
     {
       apply: 'serve',
       ...checker({
+        eslint: {
+          useFlatConfig: true,
+          lintCommand: 'eslint --cache src',
+        },
         biome: {
           command: 'lint',
         },

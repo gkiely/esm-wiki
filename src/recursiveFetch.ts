@@ -1,4 +1,4 @@
-import { type Middleware, mutate, type SWRHook } from 'swr/_internal';
+import { type Middleware, type SWRHook, mutate } from 'swr/_internal';
 import * as DriveAPI from './DriveAPI';
 import { generateQuery } from './generateQuery';
 import { log } from './logger';

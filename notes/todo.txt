@@ -5,7 +5,7 @@
 - create useFile hook [x]
 - figure out why useFile is not caching files [x]
 - get compiler working [x]
-- add no floating promise []
+- add eslint/no floating promise [x]
 - write tests with bun []
 - try out ariakit - build a small component
 - try out tailwind - build a small component
