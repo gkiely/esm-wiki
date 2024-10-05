@@ -41,9 +41,12 @@ function plugin(): Plugin {
       return config;
     },
     configureServer: (server) => {
-      console.log('Configuring server');
+      // Generate .d.ts files for all .module.css files on startup if they don't exist
       const files = walk('src', '.module.css');
-      files.forEach(createDTSFile);
+      files.forEach((path) => {
+        if (fs.existsSync(path + '.d.ts')) return;
+        createDTSFile(path);
+      });
 
       server.watcher.on('change', async (path) => {
         if (!path.endsWith('.module.css')) return;
