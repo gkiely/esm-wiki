@@ -1,15 +1,3 @@
-- get react compiler working [x]
-  - see if you can get it working [x]
-  - disable for static tree [x]
-- move to typescript [x]
-- create useFile hook [x]
-- figure out why useFile is not caching files [x]
-- get compiler working [x]
-- add eslint/no floating promise [x]
-- write tests with bun [x]
-- try out ariakit - build a small component []
-- try out tailwind - build a small component []
-- set up vanilla extract []
 - set up a separate branch in youneedawiki, copy over these files []
 - setup auth so it is called in main, hooks no longer need loaded []
 - create components []
@@ -23,4 +11,4 @@
   - icon
   - static tree
   - page
-
+- set up vanilla extract []
