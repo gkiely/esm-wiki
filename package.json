@@ -18,11 +18,11 @@
     "lint-fix": "biome check --write && eslint --cache src",
     "install-react": "npm install --no-save --no-audit --no-fund --progress=false react react-dom",
     "install-react-rc": "npm install --no-save --no-audit --no-fund --progress=false react@rc react-dom@rc",
-    "build": "npx react-compiler-healthcheck@latest --yes && bun run install-react-rc && vite build && ([ -z \"$CI\" ] && bun run install-react || true)",
+    "build": "npx react-compiler-healthcheck@latest --yes --src 'src/**/*.{ts,tsx}' && bun run install-react-rc && vite build && ([ -z \"$CI\" ] && bun run install-react || true)",
     "preview": "bun run build && vite preview",
     "install-latest": "npm i --no-fund $(bun --silent ./scripts/install-latest.ts) && npx @biomejs/biome migrate --write && biome clean && bun run postinstall",
-    "test": "bun test --preload ./preload.ts",
-    "test-watch": "bun test --watch --preload ./preload.ts",
+    "test": "bun test",
+    "test-watch": "bun test --watch",
     "tsc": "tsc",
     "postinstall": "patch-package"
   },
@@ -43,7 +43,7 @@
     "@vitejs/plugin-react": "^4.3.2",
     "@vitejs/plugin-react-swc": "^3.7.1",
     "babel-plugin-react-compiler": "^0.0.0-experimental-734b737-20241003",
-    "bun": "^1.1.29",
+    "bun": "1.1.27",
     "eslint": "^9.12.0",
     "install-changed": "^1.1.0",
     "patch-package": "^8.0.0",
@@ -60,6 +60,7 @@
     "wouter": "^3.3.5"
   },
   "overrides": {
-    "react": "$react"
+    "react": "$react",
+    "react-dom": "$react-dom"
   }
 }

@@ -4,7 +4,13 @@ const entries = [...Object.entries(packageJSON.dependencies), ...Object.entries(
 const betaAndRcDependencies = entries.filter(([_, v]) => v.includes('beta') || v.includes('rc')).map(([k]) => k);
 const fileDependencies = entries.filter(([_, v]) => v.includes('file:')).map(([k]) => k);
 
-const blacklist: string[] = [...betaAndRcDependencies, ...fileDependencies];
+const blacklist: string[] = [
+  ...betaAndRcDependencies,
+  ...fileDependencies,
+
+  // https://github.com/oven-sh/bun/issues/14021
+  'bun',
+];
 
 const deps = `${Object.keys({
   ...packageJSON.dependencies,
@@ -15,5 +21,4 @@ const deps = `${Object.keys({
   .join('@latest ')}@latest`;
 
 // Output to shell
-// eslint-disable-next-line no-console
 console.log(deps);

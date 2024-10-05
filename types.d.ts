@@ -1,5 +1,4 @@
 /// <reference types="vite/client" />
-import { TestingLibraryMatchers } from '@testing-library/jest-dom/matchers';
 
 type Token = {
   access_token: string;
@@ -242,11 +241,4 @@ declare const gapi_loaded: {
   reject: (error: Error) => void;
 };
 
-type PropsOf<T> = T extends import('preact').FunctionComponent<infer P> ? P : never;
-
-type Result<T> = import('preact-fetching').Result<T>;
-
-declare module 'bun:test' {
-  interface Matchers<T> extends TestingLibraryMatchers<typeof expect.stringContaining, T> {}
-  interface AsymmetricMatchers extends TestingLibraryMatchers {}
-}
+type PropsOf<T> = T extends React.ComponentType<infer P> ? P : never;

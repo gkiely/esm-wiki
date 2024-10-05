@@ -1,3 +1,5 @@
+import { TestingLibraryMatchers } from '@testing-library/jest-dom/matchers';
+
 // Web components
 declare global {
   namespace JSX {
@@ -16,4 +18,7 @@ declare global {
   }
 }
 
-export {};
+declare module 'bun:test' {
+  interface Matchers<T> extends TestingLibraryMatchers<typeof expect.stringContaining, T> {}
+  interface AsymmetricMatchers extends TestingLibraryMatchers {}
+}

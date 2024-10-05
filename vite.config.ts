@@ -54,16 +54,7 @@ export default defineConfig(({ command }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          react: [
-            'react',
-            'react-dom',
-            'react-dom/client',
-            '@preact/signals-react',
-            'react/compiler-runtime',
-            'scheduler',
-            'swr',
-            'wouter',
-          ],
+          react: ['react', 'react-dom', 'react-dom/client', 'react/compiler-runtime', 'scheduler', 'swr', 'wouter'],
         },
       },
     },
