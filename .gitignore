@@ -25,5 +25,3 @@ dist-ssr
 *.tsbuildinfo
 stats.html
 .eslintcache
-.stylelintcache
-*.module.css.d.ts

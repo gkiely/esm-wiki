@@ -1,3 +1,4 @@
+- set up vanilla extract [x]
 - set up a separate branch in youneedawiki, copy over these files []
 - setup auth so it is called in main, hooks no longer need loaded []
 - create components []
@@ -11,4 +12,3 @@
   - icon
   - static tree
   - page
-- set up vanilla extract []

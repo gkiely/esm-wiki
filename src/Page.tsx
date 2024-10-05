@@ -4,7 +4,7 @@ import { Link, useLocation } from 'wouter';
 import { getPrevNext } from './getPrevNext';
 import { useFiles } from './hooks.js';
 import { Folder, Pencil, Spinner } from './icons';
-import styles from './page.module.css';
+import * as styles from './page.css';
 import { parseContent } from './parseContent';
 import { StaticTree } from './Tree.jsx';
 
