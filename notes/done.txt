@@ -18,6 +18,7 @@ Dev
 - write tests with bun [x]
 - try out tailwind - build a small component [x]
 - try out ariakit - build a small component [x]
+- set up vanilla extract [x]
 
 Components
 - Page [x]

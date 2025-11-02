@@ -1,7 +1,11 @@
-- set up vanilla extract [x]
-- set up a separate branch in youneedawiki, copy over these files []
-- setup auth so it is called in main, hooks no longer need loaded []
+- set up a separate branch in youneedawiki [x]
+  - remove extra eslint configs and update eslint [x]
+  - go through package.json line by line [x]
+  - update vite.config.ts [x]
+- setup auth so it is called in main, hooks no longer need loaded [x]
 - create components []
+  - page
+  - tree
   - title
   - last modified
   - breadcrumbs
@@ -10,5 +14,8 @@
   - wikiselector
   - poweredby
   - icon
-  - static tree
-  - page
+- each component should handle it's own web component []
+- other updates []
+  - remove react-to-web-component in favor of your own simple solution
+  - update bun setup
+  - setup global and module types (types.ts, global.d.ts)

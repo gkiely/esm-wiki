@@ -19,6 +19,7 @@ export default tseslint.config({
   // These rules are not covered by biome
   // https://github.com/biomejs/biome/issues/3187
   rules: {
+    'no-unused-expressions': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'error',
     '@typescript-eslint/no-unsafe-call': 'error',
     '@typescript-eslint/no-unsafe-member-access': 'error',

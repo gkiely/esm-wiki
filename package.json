@@ -11,7 +11,6 @@
     "analyze": "ANALYZE=true bun run build",
     "start": "./scripts/start.sh",
     "dev": "vite",
-    "dev-sandbox": "vite --port 3000",
     "fast-install": "npm i --prefer-offline --progress=false --no-audit --no-fund",
     "http-dev": "npx --yes http-server --port 3000 --proxy 'http://localhost:3000?' -a localhost -o",
     "lint": "biome check && eslint --cache src",
